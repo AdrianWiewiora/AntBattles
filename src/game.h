@@ -10,7 +10,6 @@
 
 #include "Menu.h"
 
-
 class Game {
 private:
     //Variables

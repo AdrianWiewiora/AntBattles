@@ -23,6 +23,15 @@ void Game::updateSFMLEvents() {
 void Game::render() {
     window->clear();
     //Render item
+
+    sf::Texture Torf;
+    Torf.loadFromFile("../images/torf.jpg");
+    sf::RectangleShape tlo;
+    tlo.setSize(sf::Vector2f(1920.0,1080.0));
+    tlo.setTexture(&Torf);
+
+    window->draw(tlo);
+
     window->display();
 }
 
