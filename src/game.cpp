@@ -5,7 +5,7 @@ void Game::initWindow() {
     this->window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "Little Big Strategy");
 }
 
-//Constructors/Destructors
+//Constructors
 Game::Game(){
     this->initWindow();
 }
