@@ -15,17 +15,15 @@ void Game::update() {
 }
 
 void Game::updateSFMLEvents() {
-    while (this->window->pollEvent(this->sfEvent))
-    {
-        if(this->sfEvent.type == sf::Event::Closed)
+    while (window->pollEvent(this->sfEvent))
+        if (this->sfEvent.type == sf::Event::Closed)
             this->window->close();
-    }
 }
 
 void Game::render() {
-    this -> window->clear();
+    window->clear();
     //Render item
-    this -> window->display();
+    window->display();
 }
 
 void Game::run() {
