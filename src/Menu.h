@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include "GameState.h"
+
 #include "SFML/Audio.hpp"
 #include "SFML/Graphics.hpp"
 #include "SFML/Network.hpp"

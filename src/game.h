@@ -31,6 +31,6 @@ public:
   // Functions
   void updateSFMLEvents();
   void update();
-  void render();
+  //void render();
   void run();
 };

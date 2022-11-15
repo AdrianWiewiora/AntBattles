@@ -25,7 +25,7 @@ void Game::updateSFMLEvents() {
 }
 
 void Game::run() {
-  sf::Clock clock;
+  sf::Clock time;
   while (window->isOpen()) {
     if (m_current_state->getQueuedGameState() != nullptr) {
       auto t = m_current_state->getQueuedGameState();
@@ -36,7 +36,7 @@ void Game::run() {
     updateSFMLEvents();
     window->clear(sf::Color::Black);
     m_current_state->Input(window);
-    m_current_state->Update(window, clock.restart().asSeconds());
+    m_current_state->Update(window, time.restart().asSeconds());
     m_current_state->Render(window);
     window->display();
   }

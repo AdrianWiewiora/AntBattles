@@ -3,7 +3,6 @@
 #include "GameState.h"
 #include "SFML/Graphics/RenderTexture.hpp"
 #include "SFML/Graphics/RenderWindow.hpp"
-#include "cstdio"
 
 Menu::Menu() {
   Mrowka.loadFromFile("../images/img1.jpg");
