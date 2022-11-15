@@ -1,19 +1,21 @@
 #include "Menu.h"
-#include <windows.h>
+#include "AntGame.h"
+#include "GameState.h"
+#include "SFML/Graphics/RenderTexture.hpp"
+#include "SFML/Graphics/RenderWindow.hpp"
+#include "cstdio"
 
-
-void Menu::renderM(sf::RenderWindow *Window) {
-    Window->clear();
-
-    Mrowka.loadFromFile("../images/img1.jpg");
-    sf::RectangleShape Tlo;
-    Tlo.setSize(sf::Vector2f(1920.0,1080.0));
-    Tlo.setTexture(&Mrowka);
-
-    Window->draw(Tlo);
-
-    Window->display();
-
-    Sleep(1000);
-    Window->close();
+Menu::Menu() {
+  Mrowka.loadFromFile("../images/img1.jpg");
+  Tlo.setSize(sf::Vector2f(1920.0, 1080.0));
+  Tlo.setTexture(&Mrowka);
 }
+
+void Menu::Input(sf::RenderWindow *window) {}
+void Menu::Update(sf::RenderWindow *window, double delta) {
+  m_lifetime -= delta;
+
+  if (m_lifetime <= 0.0)
+    m_queued_game_state = (GameState *)new AntGame();
+}
+void Menu::Render(sf::RenderWindow *window) { window->draw(Tlo); }
