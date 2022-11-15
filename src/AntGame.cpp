@@ -12,8 +12,7 @@ AntGame::AntGame() {
   // ant1.setOrigin(2000,2000);
 
   ant1.setTexture(t);
-  ant1.setOrigin(sf::Vector2f(ant1.getTexture()->getSize().x * 0.5,
-                              ant1.getTexture()->getSize().y * 0.5));
+  ant1.setOrigin(sf::Vector2f(ant1.getTexture()->getSize().x * 0.5,ant1.getTexture()->getSize().y * 0.5));
   ant1.setScale(sf::Vector2f(0.2f, 0.2f));
   ant1.setPosition(0, 0);
 }

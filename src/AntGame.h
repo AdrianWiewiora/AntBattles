@@ -8,7 +8,6 @@
 class AntGame : GameState {
   sf::RectangleShape tlo;
   sf::Sprite ant1;
-  sf::Texture Mrowka;
   sf::Texture Torf;
   sf::Texture t;
 
