@@ -17,7 +17,7 @@ private:
   sf::Texture Mrowka;
   sf::RectangleShape Tlo;
 
-  double m_lifetime = 5;
+  double m_lifetime = 1;
 
 public:
   Menu();
