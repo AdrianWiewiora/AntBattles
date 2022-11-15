@@ -15,6 +15,11 @@ private:
     //Variables
     sf::RenderWindow *window{};
     sf::Event sfEvent{};
+    sf::Clock clock;
+    sf::RectangleShape tlo;
+    sf::Sprite ant1;
+
+    Menu menu;
     //Initialization
     void initWindow();
 
