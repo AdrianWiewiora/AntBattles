@@ -2,13 +2,11 @@
 #include "SFML/Window/Keyboard.hpp"
 
 AntGame::AntGame() {
-  sf::Texture Torf;
   Torf.loadFromFile("../images/torf2.png");
 
   tlo.setSize(sf::Vector2f(1920.0, 1080.0));
   tlo.setTexture(&Torf);
 
-  sf::Texture t;
   t.loadFromFile("../images/ant1.png");
 
   // ant1.setOrigin(2000,2000);
@@ -44,6 +42,6 @@ void AntGame::Update(sf::RenderWindow *window, double delta) {
 }
 
 void AntGame::Render(sf::RenderWindow *window) {
-  // window->draw(tlo);
+  window->draw(tlo);
   window->draw(ant1);
 }
