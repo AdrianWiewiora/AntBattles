@@ -6,10 +6,20 @@
 
 void Button::MakeB(float posX,float posY) {
     mButton.setPosition(posX,posY);
-    mButton.setFillColor(sf::Color::Blue);
-    mButton.setOutlineColor(sf::Color::White);
-    mButton.setSize(sf::Vector2f(50,50));
+    mButtonTexture.loadFromFile("../images/buttonTexture1.png");
+    mButton.setTexture(&mButtonTexture);
+    mButton.setSize(sf::Vector2f(300,75));
 }
 void Button::Render(sf::RenderWindow *window) {
     window->draw(mButton);
+    window->draw(mText);
+}
+
+void Button::SetTex(std::string Text,float pozX,float pozY) {
+    mText.setString(Text);
+    mText.setCharacterSize(50);
+    mText.setPosition(pozX,pozY);
+    mText.setFont(mFont);
+    mFont.loadFromFile("../fonts/CalibriRegular.ttf");
+    mText.setFillColor(sf::Color::Cyan);
 }
