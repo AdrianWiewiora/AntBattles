@@ -25,6 +25,9 @@ void Menu::Update(sf::RenderWindow *window, double delta) {
             //m_Button1.SetTex("Chujowo",1320,150);
             m_queued_game_state = (GameState *)new AntGame();
         }
+        if(sf::Mouse::getPosition().x < 1600 && sf::Mouse::getPosition().x > 1300 && sf::Mouse::getPosition().y > 350 && sf::Mouse::getPosition().y < 425){
+            window->close();
+        }
     }
 
 
