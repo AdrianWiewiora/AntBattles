@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include "GameState.h"
+#include "Button.h"
 
 #include "SFML/Audio.hpp"
 #include "SFML/Graphics.hpp"
@@ -16,8 +17,11 @@ class Menu : GameState {
 private:
   sf::Texture Mrowka;
   sf::RectangleShape Tlo;
+  Button m_Button1;
+  Button m_Button2;
+  Button m_Button3;
 
-  double m_lifetime = 1;
+  double m_lifetime = 50;
 
 public:
   Menu();
