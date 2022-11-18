@@ -21,11 +21,14 @@ void Menu::Update(sf::RenderWindow *window, double delta) {
   m_Button3.SetTex("Exit",1320,350);
 
     if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-        if(sf::Mouse::getPosition().x < 1600 && sf::Mouse::getPosition().x > 1300 && sf::Mouse::getPosition().y > 150 && sf::Mouse::getPosition().y < 225){
-            //m_Button1.SetTex("Chujowo",1320,150);
-            m_queued_game_state = (GameState *)new AntGame();
+        if(sf::Mouse::getPosition().x < 1600 && sf::Mouse::getPosition().x > 1300 && sf::Mouse::getPosition().y > 180 && sf::Mouse::getPosition().y < 225){
+            m_Button1.SetTex("Chujowo",1320,150);
+            //m_queued_game_state = (GameState *)new AntGame();
         }
-        if(sf::Mouse::getPosition().x < 1600 && sf::Mouse::getPosition().x > 1300 && sf::Mouse::getPosition().y > 350 && sf::Mouse::getPosition().y < 425){
+        if(sf::Mouse::getPosition().x < 1600 && sf::Mouse::getPosition().x > 1300 && sf::Mouse::getPosition().y > 235 && sf::Mouse::getPosition().y < 310){
+            window->close();
+        }
+        if(sf::Mouse::getPosition().x < 1600 && sf::Mouse::getPosition().x > 1300 && sf::Mouse::getPosition().y > 335 && sf::Mouse::getPosition().y < 410){
             window->close();
         }
     }
