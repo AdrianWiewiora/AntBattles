@@ -15,7 +15,7 @@ void Button::Render(sf::RenderWindow *window) {
     window->draw(mText);
 }
 
-void Button::SetTex(std::string Text,float pozX,float pozY) {
+void Button::SetTex(const std::string& Text,float pozX,float pozY) {
     mText.setString(Text);
     mText.setCharacterSize(50);
     mText.setPosition(pozX,pozY);

@@ -8,6 +8,6 @@ protected:
 public:
   virtual void Render(sf::RenderWindow *window) = 0;
   virtual void Input(sf::RenderWindow *window) = 0;
-  virtual void Update(sf::RenderWindow *window, double delta) = 0;
+  virtual void Update(sf::RenderWindow *window, float delta) = 0;
   GameState *getQueuedGameState();
 };

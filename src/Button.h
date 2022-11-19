@@ -22,7 +22,7 @@ private:
     sf::Font mFont;
 public:
     void MakeB(float posX,float posY);
-    void SetTex(std::string Text,float pozX,float pozY);
+    void SetTex(const std::string& Text,float pozX,float pozY);
     virtual void Render(sf::RenderWindow *window);
 };
 

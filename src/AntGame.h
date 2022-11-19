@@ -11,13 +11,13 @@ class AntGame : GameState {
   sf::Sprite ant1;
   sf::Texture Torf;
   sf::Texture t;
-  float pozX,pozY;
+  float pozX{},pozY{};
   float vectX=0,vectY=0;
-  float speedX,speedY;
+  float speedX{},speedY{};
 
 public:
   AntGame();
   virtual void Render(sf::RenderWindow *window) override;
   virtual void Input(sf::RenderWindow *window) override;
-  virtual void Update(sf::RenderWindow *window, double delta) override;
+  virtual void Update(sf::RenderWindow *window, float delta) override;
 };

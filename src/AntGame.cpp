@@ -19,7 +19,7 @@ AntGame::AntGame() {
 }
 
 void AntGame::Input(sf::RenderWindow *window) {}
-void AntGame::Update(sf::RenderWindow *window, double delta) {
+void AntGame::Update(sf::RenderWindow *window, float delta) {
 
 
     if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
@@ -49,7 +49,7 @@ void AntGame::Update(sf::RenderWindow *window, double delta) {
 
 
 
-    int rotation;
+    float rotation;
     rotation = ant1.getRotation();
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
         ant1.move(-100*delta, 0);
