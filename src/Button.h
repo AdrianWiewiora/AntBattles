@@ -12,6 +12,7 @@
 #include "SFML/Window.hpp"
 
 #include "GameState.h"
+#include <cmath>
 
 
 class Button {
@@ -24,6 +25,8 @@ public:
     void MakeB(float posX,float posY);
     void SetTex(const std::string& Text,float pozX,float pozY);
     virtual void Render(sf::RenderWindow *window);
+
+    static sf::Vector2f round(sf::Vector2f vector);
 };
 
 

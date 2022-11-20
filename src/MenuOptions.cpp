@@ -10,7 +10,16 @@ void MenuOptions::Input(sf::RenderWindow *window) {}
 void MenuOptions::Update(sf::RenderWindow *window, float delta) {
 
     if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-        if(sf::Mouse::getPosition().x < 1600 && sf::Mouse::getPosition().x > 1300 && sf::Mouse::getPosition().y > 280 && sf::Mouse::getPosition().y < 355){
+        if(sf::Mouse::getPosition().x < 1110 && sf::Mouse::getPosition().x > 810 && sf::Mouse::getPosition().y > 300 && sf::Mouse::getPosition().y < 370){
+            GameState::mDifficultLevel = 1;
+            m_queued_game_state = (GameState *)new Menu();
+        }
+        if(sf::Mouse::getPosition().x < 1110 && sf::Mouse::getPosition().x > 810 && sf::Mouse::getPosition().y > 400 && sf::Mouse::getPosition().y < 470){
+            GameState::mDifficultLevel = 2;
+            m_queued_game_state = (GameState *)new Menu();
+        }
+        if(sf::Mouse::getPosition().x < 1110 && sf::Mouse::getPosition().x > 810 && sf::Mouse::getPosition().y > 500 && sf::Mouse::getPosition().y < 570){
+            GameState::mDifficultLevel = 3;
             m_queued_game_state = (GameState *)new Menu();
         }
     }
@@ -21,11 +30,12 @@ void MenuOptions::Render(sf::RenderWindow *window) {
     window->draw(mShapeTlo);
     window->draw(mRactangleTloTransparent);
     window->draw(mSelectDifLevelText);
+    m_ButtonOptions1.Render(window);
+    m_ButtonOptions2.Render(window);
+    m_ButtonOptions3.Render(window);
 }
 
 MenuOptions::MenuOptions() {
-
-
     mTloMenuTexture.loadFromFile("../images/img1.jpg");
     mShapeTlo.setSize(sf::Vector2f(1920.0, 1080.0));
     mShapeTlo.setTexture(&mTloMenuTexture);
@@ -36,14 +46,18 @@ MenuOptions::MenuOptions() {
     mFontOptions.loadFromFile("../fonts/CalibriRegular.ttf");
     mSelectDifLevelText.setCharacterSize(50);
     mSelectDifLevelText.setString("Select Difficult Level");
-
-
     auto center = mSelectDifLevelText.getGlobalBounds().getSize() / 2.f;
     auto localBounds = center + mSelectDifLevelText.getLocalBounds().getPosition();
     auto rounded = round(localBounds);
     mSelectDifLevelText.setOrigin(rounded);
     mSelectDifLevelText.setPosition(960,140);
 
+    m_ButtonOptions1.MakeB(960,300);
+    m_ButtonOptions2.MakeB(960,400);
+    m_ButtonOptions3.MakeB(960,500);
+    m_ButtonOptions1.SetTex("Easy",960,300);
+    m_ButtonOptions2.SetTex("Medium",960,400);
+    m_ButtonOptions3.SetTex("Hard",960,500);
 }
 
 sf::Vector2f MenuOptions::round(const sf::Vector2f vector) {

@@ -13,7 +13,6 @@ class AntGame : GameState {
   sf::Texture t;
   float pozX{},pozY{};
   float vectX=0,vectY=0;
-  float speedX{},speedY{};
 
 public:
   AntGame();
