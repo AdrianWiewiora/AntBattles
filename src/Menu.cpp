@@ -25,8 +25,8 @@ void Menu::Update(sf::RenderWindow *window, float delta) {
             m_queued_game_state = (GameState *)new MenuOptions();
         }
         if(sf::Mouse::getPosition().x < 1600 && sf::Mouse::getPosition().x > 1300 && sf::Mouse::getPosition().y > 380 && sf::Mouse::getPosition().y < 455){
-            std::cout<<mDifficultLevel;
-            //window->close();
+            //std::cout<<mDifficultLevel;
+            window->close();
         }
     }
 
