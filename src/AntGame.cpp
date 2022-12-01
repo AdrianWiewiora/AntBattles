@@ -1,12 +1,15 @@
+#include <iostream>
 #include "AntGame.h"
 #include "SFML/Window/Keyboard.hpp"
 #include "SFML/Window/Mouse.hpp"
 
 AntGame::AntGame() {
-    Torf.loadFromFile("../images/torf2.png");
+    Torf.loadFromFile("../images/mapTexture1.png");
 
-    tlo.setSize(sf::Vector2f(1920.0, 1080.0));
+    tlo.setSize(sf::Vector2f(3840.0, 5400.0));
     tlo.setTexture(&Torf);
+    view1.setSize(1920,1080);
+    view1.setCenter(1000,1000);
 
     t.loadFromFile("../images/ant1.png");
 
@@ -35,6 +38,40 @@ void AntGame::Update(sf::RenderWindow *window, float delta) {
         //ant1.move(((pozX-ant1.getPosition().x)/100)*delta,((pozY-ant1.getPosition().y)/100)*delta);
     }
 
+/*    if (mouseWheel.type == sf::Event::MouseWheelScrolled)
+    {
+        if(mouseWheel.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel)
+        {
+            view1.zoom(0.999f);
+            std::cout << "dupa";
+        }
+        else if(mouseWheel.mouseWheelScroll.wheel == sf::Mouse::HorizontalWheel)
+        {
+            view1.zoom(1.001f);
+        }
+    }*/
+    if(mouseWheel.type == sf::Event::MouseWheelScrolled)
+    {
+        if(mouseWheel.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel)
+            std::cout << "wheel type: vertical" << std::endl;
+        else if(mouseWheel.mouseWheelScroll.wheel == sf::Mouse::HorizontalWheel)
+            std::cout << "wheel type: horizontal" << std::endl;
+        else
+            std::cout << "wheel type: unknown" << std::endl;
+
+        std::cout << "wheel movement: " << mouseWheel.mouseWheelScroll.delta << std::endl;
+        std::cout << "mouse x: " << mouseWheel.mouseWheelScroll.x << std::endl;
+        std::cout << "mouse y: " << mouseWheel.mouseWheelScroll.y << std::endl;
+    }
+
+
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageUp)) {
+        view1.zoom(0.999f);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageDown)) {
+        view1.zoom(1.001f);
+    }
 
 
 //    if (vectX < 0) speedX = -100;
@@ -46,8 +83,6 @@ void AntGame::Update(sf::RenderWindow *window, float delta) {
 //    if(ant1.getPosition().x != pozX && ant1.getPosition().y != pozY) {
 //        ant1.move(speedX * delta, speedY * delta);
 //    }
-
-
 
     float rotation;
     rotation = ant1.getRotation();
@@ -98,6 +133,7 @@ void AntGame::Update(sf::RenderWindow *window, float delta) {
 }
 
 void AntGame::Render(sf::RenderWindow *window) {
+    window->setView(view1);
     window->draw(tlo);
     window->draw(ant1);
 }

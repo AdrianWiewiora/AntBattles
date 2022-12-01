@@ -4,6 +4,7 @@
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Graphics/Sprite.hpp"
 #include "SFML/Graphics/Texture.hpp"
+#include "SFML/Window/Event.hpp"
 
 
 class AntGame : GameState {
@@ -11,6 +12,8 @@ class AntGame : GameState {
   sf::Sprite ant1;
   sf::Texture Torf;
   sf::Texture t;
+  sf::View view1;
+  sf::Event mouseWheel;
   float pozX{},pozY{};
   float vectX=0,vectY=0;
 
