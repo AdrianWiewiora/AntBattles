@@ -30,8 +30,6 @@ void Menu::Update(sf::RenderWindow *window, float delta) {
         }
     }
 
-
-
     if (m_lifetime <= 0.0)
         m_queued_game_state = (GameState *)new AntGame();
 }
