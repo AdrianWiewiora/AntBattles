@@ -56,20 +56,6 @@ void AntGame::Update(sf::RenderWindow *window, float delta) {
         }
     }*/
 
-//    if(mouseWheel.type == sf::Event::MouseWheelScrolled)
-//    {
-//        if(mouseWheel.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel)
-//            std::cout << "wheel type: vertical" << std::endl;
-//        else if(mouseWheel.mouseWheelScroll.wheel == sf::Mouse::HorizontalWheel)
-//            std::cout << "wheel type: horizontal" << std::endl;
-//        else
-//            std::cout << "wheel type: unknown" << std::endl;
-//
-//        std::cout << "wheel movement: " << mouseWheel.mouseWheelScroll.delta << std::endl;
-//        std::cout << "mouse x: " << mouseWheel.mouseWheelScroll.x << std::endl;
-//        std::cout << "mouse y: " << mouseWheel.mouseWheelScroll.y << std::endl;
-//    }
-
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageUp)) {
         view1.zoom(0.999f);
     }
@@ -143,25 +129,40 @@ void AntGame::Render(sf::RenderWindow *window) {
     window->draw(tlo);
     window->draw(ant1);
 
-
     while (window->pollEvent(mouseWheel))
     {
-        // check the type of the event...
+        if (mouseWheel.mouseWheelScroll.delta != 0) {
+            //std::cout<<mouseWheel.mouseWheelScroll.delta << std::endl;
+            //std::cout<<mouseWheel.mouseWheelScroll.x << std::endl;
+            std::cout<<mouseWheel.mouseWheelScroll.wheel << std::endl;
+//            viewWidth -= 64;
+//            viewHeight -= 36;
+//            view1.setSize(viewWidth,viewHeight);
+//            view1.zoom(0.5);
+        } else if(mouseWheel.mouseWheelScroll.delta == 3) {
+//            viewWidth += 64;
+//            viewHeight += 36;
+//            view1.setSize(viewWidth,viewHeight);
+//            view1.zoom(1.5);
+        }
+
+
+        /*// check the type of the event...
         switch (mouseWheel.type)
         {
             case sf::Event::MouseWheelScrolled:
                 if (mouseWheel.mouseWheelScroll.delta == 1) {
                     viewWidth -= 64;
                     viewHeight -= 36;
-                    view1.setSize(viewWidth,viewHeight);
-                    //view1.zoom(1.001f);
-                } else {
+                    //view1.setSize(viewWidth,viewHeight);
+                    view1.zoom(0.5);
+                } else if(mouseWheel.mouseWheelScroll.delta == -1) {
                     viewWidth += 64;
                     viewHeight += 36;
-                    view1.setSize(viewWidth,viewHeight);
-                    //view1.zoom(0.999f);
+                    //view1.setSize(viewWidth,viewHeight);
+                    view1.zoom(1.5);
                 }
-/*                if (mouseWheel.mouseWheelScroll.delta == 1) {
+*//*                if (mouseWheel.mouseWheelScroll.delta == 1) {
                     viewWidth *= 0.001;
                     viewHeight *= 0.001;
                     view1.setSize(viewWidth,viewHeight);
@@ -173,8 +174,8 @@ void AntGame::Render(sf::RenderWindow *window) {
                     viewHeight -= helpY;
                     view1.setSize(viewWidth,viewHeight);
                     //view1.zoom(0.999f);
-                }*/
-/*                if(mouseWheel.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel) {
+                }*//*
+*//*                if(mouseWheel.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel) {
                     if (mouseWheel.mouseWheelScroll.delta == 1) {
                         viewWidth *= 0.01;
                         viewHeight *= 0.01;
@@ -191,11 +192,11 @@ void AntGame::Render(sf::RenderWindow *window) {
                         view1.setSize(viewWidth,viewHeight);
                         //view1.zoom(1);
                     }
-                }*/
+                }*//*
                 break;
 
             default:
                 break;
-        }
+        }*/
     }
 }
