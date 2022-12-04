@@ -11,6 +11,7 @@
 #include "SFML/Window.hpp"
 
 #include "Menu.h"
+#include "FrameInfo.h"
 
 class Game {
 private:
@@ -19,6 +20,8 @@ private:
   sf::Event sfEvent{};
   sf::Clock clock;
   GameState *m_current_state;
+  FrameInfo frameInfo;
+
 
   Menu menu;
   // Initialization

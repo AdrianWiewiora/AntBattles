@@ -7,7 +7,7 @@
 
 
 void MenuOptions::Input(sf::RenderWindow *window) {}
-void MenuOptions::Update(sf::RenderWindow *window, float delta) {
+void MenuOptions::Update(sf::RenderWindow *window, FrameInfo &frameInfo) {
 
     if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
         if(sf::Mouse::getPosition().x < 1110 && sf::Mouse::getPosition().x > 810 && sf::Mouse::getPosition().y > 300 && sf::Mouse::getPosition().y < 370){

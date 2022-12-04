@@ -26,5 +26,5 @@ public:
   AntGame();
   virtual void Render(sf::RenderWindow *window) override;
   virtual void Input(sf::RenderWindow *window) override;
-  virtual void Update(sf::RenderWindow *window, float delta) override;
+  virtual void Update(sf::RenderWindow *window, FrameInfo &frameInfo)  override;
 };

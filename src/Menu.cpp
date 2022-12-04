@@ -7,8 +7,8 @@ Menu::Menu() {
 }
 
 void Menu::Input(sf::RenderWindow *window) {}
-void Menu::Update(sf::RenderWindow *window, float delta) {
-    m_lifetime -= delta;
+void Menu::Update(sf::RenderWindow *window, FrameInfo &frameInfo) {
+    m_lifetime -= frameInfo.delta;
     m_Button1.MakeB(1450,187.5);
     m_Button2.MakeB(1450,287.5);
     m_Button3.MakeB(1450,387.5);
@@ -17,14 +17,14 @@ void Menu::Update(sf::RenderWindow *window, float delta) {
     m_Button3.SetTex("Exit",1450,387.5);
 
     if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-        if(sf::Mouse::getPosition().x < 1600 && sf::Mouse::getPosition().x > 1300 && sf::Mouse::getPosition().y > 180 && sf::Mouse::getPosition().y < 255){
+        if(sf::Mouse::getPosition(*window).x < 1600 && sf::Mouse::getPosition(*window).x > 1300 && sf::Mouse::getPosition(*window).y > 180 && sf::Mouse::getPosition(*window).y < 255){
             //m_Button1.SetTex("Chujowo",1320,150);
             m_queued_game_state = (GameState *)new AntGame();
         }
-        if(sf::Mouse::getPosition().x < 1600 && sf::Mouse::getPosition().x > 1300 && sf::Mouse::getPosition().y > 280 && sf::Mouse::getPosition().y < 355){
+        if(sf::Mouse::getPosition(*window).x < 1600 && sf::Mouse::getPosition(*window).x > 1300 && sf::Mouse::getPosition(*window).y > 280 && sf::Mouse::getPosition(*window).y < 355){
             m_queued_game_state = (GameState *)new MenuOptions();
         }
-        if(sf::Mouse::getPosition().x < 1600 && sf::Mouse::getPosition().x > 1300 && sf::Mouse::getPosition().y > 380 && sf::Mouse::getPosition().y < 455){
+        if(sf::Mouse::getPosition(*window).x < 1600 && sf::Mouse::getPosition(*window).x > 1300 && sf::Mouse::getPosition(*window).y > 380 && sf::Mouse::getPosition(*window).y < 455){
             //std::cout<<mDifficultLevel;
             window->close();
         }

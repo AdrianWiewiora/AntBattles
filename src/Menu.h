@@ -9,6 +9,7 @@
 
 #include "AntGame.h"
 #include "MenuOptions.h"
+#include "FrameInfo.h"
 
 #include "SFML/Audio.hpp"
 #include "SFML/Graphics.hpp"
@@ -30,5 +31,5 @@ public:
     Menu();
     virtual void Render(sf::RenderWindow *window) override;
     virtual void Input(sf::RenderWindow *window) override;
-    virtual void Update(sf::RenderWindow *window, float delta) override;
+    virtual void Update(sf::RenderWindow *window, FrameInfo &frameInfo) override;
 };

@@ -20,7 +20,7 @@ AntGame::AntGame() {
 }
 
 void AntGame::Input(sf::RenderWindow *window) {}
-void AntGame::Update(sf::RenderWindow *window, float delta) {
+void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
 
 
     if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
@@ -31,7 +31,7 @@ void AntGame::Update(sf::RenderWindow *window, float delta) {
         vectX = pozX-ant1.getPosition().x;
         vectY= pozY-ant1.getPosition().y;
 
-        ant1.move(sf::Vector2f(vectX*delta,vectY*delta));
+        ant1.move(sf::Vector2f(vectX*frameInfo.delta,vectY*frameInfo.delta));
 
         //ant1.move(((pozX-ant1.getPosition().x)/100)*delta,((pozY-ant1.getPosition().y)/100)*delta);
     }
@@ -56,12 +56,7 @@ void AntGame::Update(sf::RenderWindow *window, float delta) {
         }
     }*/
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageUp)) {
-        view1.zoom(0.999f);
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageDown)) {
-        view1.zoom(1.001f);
-    }
+
 
 
 //    if (vectX < 0) speedX = -100;
@@ -77,65 +72,68 @@ void AntGame::Update(sf::RenderWindow *window, float delta) {
     float rotation;
     rotation = ant1.getRotation();
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-        ant1.move(-100*delta, 0);
-        if(rotation<270 && rotation>=90){ant1.rotate(60*delta);}
-        else if(rotation>270 || rotation<=90){ant1.rotate(-60*delta);}
+        ant1.move(-100*frameInfo.delta, 0);
+        if(rotation<270 && rotation>=90){ant1.rotate(60*frameInfo.delta);}
+        else if(rotation>270 || rotation<=90){ant1.rotate(-60*frameInfo.delta);}
         else if(rotation==0){ant1.setRotation(360);}
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        ant1.move(100*delta, 0);
-        if(rotation<=270 && rotation>90){ant1.rotate(-60*delta);}
-        else if(rotation>=270 || rotation<90){ant1.rotate(60*delta);}
+        ant1.move(100*frameInfo.delta, 0);
+        if(rotation<=270 && rotation>90){ant1.rotate(-60*frameInfo.delta);}
+        else if(rotation>=270 || rotation<90){ant1.rotate(60*frameInfo.delta);}
         else if(rotation==0){ant1.setRotation(360);}
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        ant1.move(0, -100*delta);
-        if(rotation<=180 && rotation>0){ant1.rotate(-60*delta);}
-        else if(rotation>=180 || rotation<0){ant1.rotate(60*delta);}
+        ant1.move(0, -100*frameInfo.delta);
+        if(rotation<=180 && rotation>0){ant1.rotate(-60*frameInfo.delta);}
+        else if(rotation>=180 || rotation<0){ant1.rotate(60*frameInfo.delta);}
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        ant1.move(0, 100*delta);
-        if(rotation<180 && rotation>=0){ant1.rotate(60*delta);}
-        else if(rotation>180 || rotation<=0){ant1.rotate(-60*delta);}
+        ant1.move(0, 100*frameInfo.delta);
+        if(rotation<180 && rotation>=0){ant1.rotate(60*frameInfo.delta);}
+        else if(rotation>180 || rotation<=0){ant1.rotate(-60*frameInfo.delta);}
     }
 
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        if(rotation<315 && rotation>=135){ant1.rotate(60*delta);}
-        else if(rotation>315 || rotation<=135){ant1.rotate(-60*delta);}
+        if(rotation<315 && rotation>=135){ant1.rotate(60*frameInfo.delta);}
+        else if(rotation>315 || rotation<=135){ant1.rotate(-60*frameInfo.delta);}
         else if(rotation==0){ant1.setRotation(360);}
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        if(rotation<225 && rotation>=45){ant1.rotate(60*delta);}
-        else if(rotation>225 || rotation<=45){ant1.rotate(-60*delta);}
+        if(rotation<225 && rotation>=45){ant1.rotate(60*frameInfo.delta);}
+        else if(rotation>225 || rotation<=45){ant1.rotate(-60*frameInfo.delta);}
         else if(rotation==0){ant1.setRotation(360);}
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        if(rotation<=225 && rotation>45){ant1.rotate(-60*delta);}
-        else if(rotation>=225 || rotation<45){ant1.rotate(60*delta);}
+        if(rotation<=225 && rotation>45){ant1.rotate(-60*frameInfo.delta);}
+        else if(rotation>=225 || rotation<45){ant1.rotate(60*frameInfo.delta);}
         else if(rotation==0){ant1.setRotation(360);}
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        if(rotation<=315 && rotation>135){ant1.rotate(-60*delta);}
-        else if(rotation>=315 || rotation<135){ant1.rotate(60*delta);}
+        if(rotation<=315 && rotation>135){ant1.rotate(-60*frameInfo.delta);}
+        else if(rotation>=315 || rotation<135){ant1.rotate(60*frameInfo.delta);}
         else if(rotation==0){ant1.setRotation(360);}
     }
-}
 
-void AntGame::Render(sf::RenderWindow *window) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageUp)) {
+        view1.zoom(-1.1f * frameInfo.delta +1);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageDown)) {
+        view1.zoom(1.1f * frameInfo.delta +1);
+    }
+
+    view1.zoom(1.0+frameInfo.mouseWheelDelta * -0.09);
 
 
-    window->setView(view1);
-    window->draw(tlo);
-    window->draw(ant1);
-
-    while (window->pollEvent(event))
+    /*while (window->pollEvent(event))
     {
         switch(event.type){
             case sf::Event::MouseWheelScrolled:
-                view1.zoom(event.mouseWheelScroll.delta * -0.1 + 1.0);
+                view1.zoom(event.mouseWheelScroll.delta * -0.01 + 1.0);
                 break;
             case sf::Event::Closed:
+                window->close();
                 break;
             case sf::Event::Resized:
                 break;
@@ -182,5 +180,11 @@ void AntGame::Render(sf::RenderWindow *window) {
             case sf::Event::Count:
                 break;
         }
-    }
+    }*/
+}
+
+void AntGame::Render(sf::RenderWindow *window) {
+    window->setView(view1);
+    window->draw(tlo);
+    window->draw(ant1);
 }
