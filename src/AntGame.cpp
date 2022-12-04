@@ -36,15 +36,15 @@ void AntGame::Update(sf::RenderWindow *window, float delta) {
         //ant1.move(((pozX-ant1.getPosition().x)/100)*delta,((pozY-ant1.getPosition().y)/100)*delta);
     }
 
-/*    if (mouseWheel.type == sf::Event::MouseWheelScrolled)
+/*    if (event.type == sf::Event::MouseWheelScrolled)
     {
-        if(mouseWheel.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel) {
-            if (mouseWheel.mouseWheelScroll.delta == 1) {
+        if(event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel) {
+            if (event.mouseWheelScroll.delta == 1) {
                 viewWidth--;
                 viewHeight--;
                 view1.setSize(viewWidth,viewHeight);
                 //view1.zoom(1.001f);
-            } else if (mouseWheel.mouseWheelScroll.delta == -1) {
+            } else if (event.mouseWheelScroll.delta == -1) {
                 viewWidth++;
                 viewHeight++;
                 view1.setSize(viewWidth,viewHeight);
@@ -129,74 +129,58 @@ void AntGame::Render(sf::RenderWindow *window) {
     window->draw(tlo);
     window->draw(ant1);
 
-    while (window->pollEvent(mouseWheel))
+    while (window->pollEvent(event))
     {
-        if (mouseWheel.mouseWheelScroll.delta != 0) {
-            //std::cout<<mouseWheel.mouseWheelScroll.delta << std::endl;
-            //std::cout<<mouseWheel.mouseWheelScroll.x << std::endl;
-            std::cout<<mouseWheel.mouseWheelScroll.wheel << std::endl;
-//            viewWidth -= 64;
-//            viewHeight -= 36;
-//            view1.setSize(viewWidth,viewHeight);
-//            view1.zoom(0.5);
-        } else if(mouseWheel.mouseWheelScroll.delta == 3) {
-//            viewWidth += 64;
-//            viewHeight += 36;
-//            view1.setSize(viewWidth,viewHeight);
-//            view1.zoom(1.5);
-        }
-
-
-        /*// check the type of the event...
-        switch (mouseWheel.type)
-        {
+        switch(event.type){
             case sf::Event::MouseWheelScrolled:
-                if (mouseWheel.mouseWheelScroll.delta == 1) {
-                    viewWidth -= 64;
-                    viewHeight -= 36;
-                    //view1.setSize(viewWidth,viewHeight);
-                    view1.zoom(0.5);
-                } else if(mouseWheel.mouseWheelScroll.delta == -1) {
-                    viewWidth += 64;
-                    viewHeight += 36;
-                    //view1.setSize(viewWidth,viewHeight);
-                    view1.zoom(1.5);
-                }
-*//*                if (mouseWheel.mouseWheelScroll.delta == 1) {
-                    viewWidth *= 0.001;
-                    viewHeight *= 0.001;
-                    view1.setSize(viewWidth,viewHeight);
-                    //view1.zoom(1.001f);
-                } else {
-                    helpX = viewWidth *= 0.001;
-                    helpY = viewHeight *= 0.001;
-                    viewWidth -= helpX;
-                    viewHeight -= helpY;
-                    view1.setSize(viewWidth,viewHeight);
-                    //view1.zoom(0.999f);
-                }*//*
-*//*                if(mouseWheel.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel) {
-                    if (mouseWheel.mouseWheelScroll.delta == 1) {
-                        viewWidth *= 0.01;
-                        viewHeight *= 0.01;
-                        view1.setSize(viewWidth,viewHeight);
-                        //view1.zoom(1.001f);
-                    } else if (mouseWheel.mouseWheelScroll.delta == -1) {
-                        helpX = viewWidth *= 0.01;
-                        helpY = viewHeight *= 0.01;
-                        viewWidth -= helpX;
-                        viewHeight -= helpY;
-                        view1.setSize(viewWidth,viewHeight);
-                        //view1.zoom(0.999f);
-                    } else {
-                        view1.setSize(viewWidth,viewHeight);
-                        //view1.zoom(1);
-                    }
-                }*//*
+                view1.zoom(event.mouseWheelScroll.delta * -0.1 + 1.0);
                 break;
-
-            default:
+            case sf::Event::Closed:
                 break;
-        }*/
+            case sf::Event::Resized:
+                break;
+            case sf::Event::LostFocus:
+                break;
+            case sf::Event::GainedFocus:
+                break;
+            case sf::Event::TextEntered:
+                break;
+            case sf::Event::KeyPressed:
+                break;
+            case sf::Event::KeyReleased:
+                break;
+            case sf::Event::MouseWheelMoved:
+                break;
+            case sf::Event::MouseButtonPressed:
+                break;
+            case sf::Event::MouseButtonReleased:
+                break;
+            case sf::Event::MouseMoved:
+                break;
+            case sf::Event::MouseEntered:
+                break;
+            case sf::Event::MouseLeft:
+                break;
+            case sf::Event::JoystickButtonPressed:
+                break;
+            case sf::Event::JoystickButtonReleased:
+                break;
+            case sf::Event::JoystickMoved:
+                break;
+            case sf::Event::JoystickConnected:
+                break;
+            case sf::Event::JoystickDisconnected:
+                break;
+            case sf::Event::TouchBegan:
+                break;
+            case sf::Event::TouchMoved:
+                break;
+            case sf::Event::TouchEnded:
+                break;
+            case sf::Event::SensorChanged:
+                break;
+            case sf::Event::Count:
+                break;
+        }
     }
 }

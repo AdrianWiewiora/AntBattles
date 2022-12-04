@@ -16,7 +16,7 @@ class AntGame : GameState {
   sf::Texture Torf;
   sf::Texture t;
   sf::View view1;
-  sf::Event mouseWheel;
+  sf::Event event;
   float pozX{},pozY{};
   float vectX=0,vectY=0;
   float viewWidth = 1920,viewHeight = 1080;
