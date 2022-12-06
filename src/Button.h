@@ -13,6 +13,7 @@
 
 #include "GameState.h"
 #include <cmath>
+#include <iostream>
 
 
 class Button {
@@ -21,12 +22,13 @@ private:
     sf::RectangleShape mButton;
     sf::Text mText;
     sf::Font mFont;
+    sf::Vector2f positions;
 public:
-    void MakeB(float posX,float posY);
-    void SetTex(const std::string& Text,float pozX,float pozY);
     virtual void Render(sf::RenderWindow *window);
-
     static sf::Vector2f round(sf::Vector2f vector);
+    Button(float posX, float posY, const std::string &Text);
+
+    int buttonClicked(sf::RenderWindow *window);
 };
 
 

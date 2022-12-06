@@ -51,13 +51,6 @@ MenuOptions::MenuOptions() {
     auto rounded = round(localBounds);
     mSelectDifLevelText.setOrigin(rounded);
     mSelectDifLevelText.setPosition(960,140);
-
-    m_ButtonOptions1.MakeB(960,300);
-    m_ButtonOptions2.MakeB(960,400);
-    m_ButtonOptions3.MakeB(960,500);
-    m_ButtonOptions1.SetTex("Easy",960,300);
-    m_ButtonOptions2.SetTex("Medium",960,400);
-    m_ButtonOptions3.SetTex("Hard",960,500);
 }
 
 sf::Vector2f MenuOptions::round(const sf::Vector2f vector) {

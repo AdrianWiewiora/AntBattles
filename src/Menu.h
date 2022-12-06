@@ -21,11 +21,11 @@ class Menu : GameState {
 private:
     sf::Texture Mrowka;
     sf::RectangleShape Tlo;
-    Button m_Button1;
-    Button m_Button2;
-    Button m_Button3;
+    Button m_Button1{1450.0,187.5,"Start"};
+    Button m_Button2{1450.0,287.5,"Options"};
+    Button m_Button3{1450.0,387.5,"Exit"};
 
-    double m_lifetime = 50;
+    double m_lifetime = 60;
 
 public:
     Menu();

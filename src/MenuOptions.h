@@ -26,9 +26,9 @@ private:
     sf::RectangleShape mRactangleTloTransparent;
     sf::Text mSelectDifLevelText;
     sf::Font mFontOptions;
-    Button m_ButtonOptions1;
-    Button m_ButtonOptions2;
-    Button m_ButtonOptions3;
+    Button m_ButtonOptions1{960,300,"Easy"};
+    Button m_ButtonOptions2{960,400,"Medium"};
+    Button m_ButtonOptions3{960,500,"Hard"};
 
 public:
     MenuOptions();

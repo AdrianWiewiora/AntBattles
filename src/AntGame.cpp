@@ -36,29 +36,6 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
         //ant1.move(((pozX-ant1.getPosition().x)/100)*delta,((pozY-ant1.getPosition().y)/100)*delta);
     }
 
-/*    if (event.type == sf::Event::MouseWheelScrolled)
-    {
-        if(event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel) {
-            if (event.mouseWheelScroll.delta == 1) {
-                viewWidth--;
-                viewHeight--;
-                view1.setSize(viewWidth,viewHeight);
-                //view1.zoom(1.001f);
-            } else if (event.mouseWheelScroll.delta == -1) {
-                viewWidth++;
-                viewHeight++;
-                view1.setSize(viewWidth,viewHeight);
-                //view1.zoom(0.999f);
-            } else {
-                view1.setSize(viewWidth,viewHeight);
-                //view1.zoom(1);
-            }
-        }
-    }*/
-
-
-
-
 //    if (vectX < 0) speedX = -100;
 //    else speedX = 100;
 //
@@ -94,7 +71,6 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
         else if(rotation>180 || rotation<=0){ant1.rotate(-60*frameInfo.delta);}
     }
 
-
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
         if(rotation<315 && rotation>=135){ant1.rotate(60*frameInfo.delta);}
         else if(rotation>315 || rotation<=135){ant1.rotate(-60*frameInfo.delta);}
@@ -124,63 +100,6 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
     }
 
     view1.zoom(1.0+frameInfo.mouseWheelDelta * -0.09);
-
-
-    /*while (window->pollEvent(event))
-    {
-        switch(event.type){
-            case sf::Event::MouseWheelScrolled:
-                view1.zoom(event.mouseWheelScroll.delta * -0.01 + 1.0);
-                break;
-            case sf::Event::Closed:
-                window->close();
-                break;
-            case sf::Event::Resized:
-                break;
-            case sf::Event::LostFocus:
-                break;
-            case sf::Event::GainedFocus:
-                break;
-            case sf::Event::TextEntered:
-                break;
-            case sf::Event::KeyPressed:
-                break;
-            case sf::Event::KeyReleased:
-                break;
-            case sf::Event::MouseWheelMoved:
-                break;
-            case sf::Event::MouseButtonPressed:
-                break;
-            case sf::Event::MouseButtonReleased:
-                break;
-            case sf::Event::MouseMoved:
-                break;
-            case sf::Event::MouseEntered:
-                break;
-            case sf::Event::MouseLeft:
-                break;
-            case sf::Event::JoystickButtonPressed:
-                break;
-            case sf::Event::JoystickButtonReleased:
-                break;
-            case sf::Event::JoystickMoved:
-                break;
-            case sf::Event::JoystickConnected:
-                break;
-            case sf::Event::JoystickDisconnected:
-                break;
-            case sf::Event::TouchBegan:
-                break;
-            case sf::Event::TouchMoved:
-                break;
-            case sf::Event::TouchEnded:
-                break;
-            case sf::Event::SensorChanged:
-                break;
-            case sf::Event::Count:
-                break;
-        }
-    }*/
 }
 
 void AntGame::Render(sf::RenderWindow *window) {

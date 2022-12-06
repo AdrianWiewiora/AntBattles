@@ -2,12 +2,9 @@
 #include "Menu.h"
 #include "SFML/Graphics/Color.hpp"
 
-// Initializer functions
 void Game::initWindow() {
-  // this->window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "Little Big
-  // Strategy",sf::Style::Fullscreen);
-  this->window =
-      new sf::RenderWindow(sf::VideoMode(1920, 1080), "Little Big Strategy");
+  // this->window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "Little Big Strategy",sf::Style::Fullscreen);
+  this->window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "Little Big Strategy");
 }
 
 Game::Game() {
@@ -23,7 +20,6 @@ void Game::updateSFMLEvents() {
         switch(sfEvent.type){
             case sf::Event::MouseWheelScrolled:
                 frameInfo.mouseWheelDelta += sfEvent.mouseWheelScroll.delta;
-                //view1.zoom(sfEvent.mouseWheelScroll.delta * -0.01 + 1.0);
                 break;
             case sf::Event::Closed:
                 window->close();
@@ -74,9 +70,6 @@ void Game::updateSFMLEvents() {
                 break;
         }
     }
-//  while (window->pollEvent(this->sfEvent))
-//    if (this->sfEvent.type == sf::Event::Closed)
-//      this->window->close();
 }
 
 void Game::run() {
