@@ -19,7 +19,20 @@ void Game::updateSFMLEvents() {
     {
         switch(sfEvent.type){
             case sf::Event::MouseWheelScrolled:
-                frameInfo.mouseWheelDelta += sfEvent.mouseWheelScroll.delta;
+                if(sfEvent.mouseWheelScroll.delta >=0){
+                    if(frameInfo.zoomViewAdd < 8 && frameInfo.zoomViewAdd >= -8){
+                        frameInfo.mouseWheelDelta += sfEvent.mouseWheelScroll.delta;
+                        frameInfo.zoomViewAdd += 1;
+                        frameInfo.zoomViewDel += 1;
+                    }
+                }
+                else{
+                    if(frameInfo.zoomViewDel > -8 && frameInfo.zoomViewDel <= 8){
+                        frameInfo.mouseWheelDelta += sfEvent.mouseWheelScroll.delta;
+                        frameInfo.zoomViewDel -= 1;
+                        frameInfo.zoomViewAdd -= 1;
+                    }
+                }
                 break;
             case sf::Event::Closed:
                 window->close();
