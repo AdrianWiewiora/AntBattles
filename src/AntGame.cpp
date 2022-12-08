@@ -19,23 +19,43 @@ AntGame::AntGame() {
     ant1.setPosition(500, 500);
 }
 
+//float Clamp(float value, float max, float min)
+//{
+//    if(value < min)
+//        return min;
+//    if(value > max)
+//        return max;
+//    return value;
+//}
+
 void AntGame::Input(sf::RenderWindow *window) {}
 void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
 
     //Function steering zoom itd
-    if(frameInfo.zoomViewDel == -8 || frameInfo.zoomViewDel == 8){
-        view1.setSize(frameInfo.setViewFrame());
-    }
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageUp)) {
-        view1.zoom(-1.1f * frameInfo.delta +1);
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageDown)) {
-        view1.zoom(1.1f * frameInfo.delta +1);
-    }
-
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageUp))view1.zoom(-1.1f * frameInfo.delta +1);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageDown)) view1.zoom(1.1f * frameInfo.delta +1);
     view1.zoom(1.0 +frameInfo.mouseWheelDelta * -0.1);
+    sf::Vector2f vectorViewSize;
+    vectorViewSize = view1.getSize();
+    float sizeX = Clamp(vectorViewSize.x,3840,960);
+    float sizeY = Clamp(vectorViewSize.y,2160,540);
+    view1.setSize(sizeX,sizeY);
 
+    //Function steering Center itd
+    float move = 500 * frameInfo.delta;
+    sf::Vector2f vectorCenterMax = MaxCenter(frameInfo);
+    sf::Vector2f vectorCenterMin = MinCenter(frameInfo);
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) view1.move(0,-move);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) view1.move(-move,0);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) view1.move(0,move);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) view1.move(move,0);
+
+    float x = Clamp(view1.getCenter().x,vectorCenterMin.x,vectorCenterMax.x);
+    float y = Clamp(view1.getCenter().y,vectorCenterMin.y,vectorCenterMax.y);
+    view1.setCenter(x,y);
+
+    
     //Funkcje pozostale
 
 /*    void GameObject::rotateToMouse()
@@ -109,26 +129,6 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
         else if(rotation>=315 || rotation<135){ant1.rotate(60*frameInfo.delta);}
         else if(rotation==0){ant1.setRotation(360);}
     }
-
-
-
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-        vectorViewCenter = view1.getCenter();
-        view1.setCenter(vectorViewCenter.x,vectorViewCenter.y-0.5);
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-        vectorViewCenter = view1.getCenter();
-        view1.setCenter(vectorViewCenter.x-0.5,vectorViewCenter.y);
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-        vectorViewCenter = view1.getCenter();
-        view1.setCenter(vectorViewCenter.x,vectorViewCenter.y+0.5);
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        vectorViewCenter = view1.getCenter();
-        view1.setCenter(vectorViewCenter.x+0.5,vectorViewCenter.y);
-    }
 }
 
 void AntGame::Render(sf::RenderWindow *window) {
@@ -140,7 +140,6 @@ void AntGame::Render(sf::RenderWindow *window) {
 void AntGame::MoveAnts(sf::Vector2f positions,FrameInfo &frameInfo) {
     ant1.setPosition(positions);
 
-
 //    sf::Vector2f help1;
 //    help1.x =2;
 //    help1.y =2;
@@ -148,4 +147,30 @@ void AntGame::MoveAnts(sf::Vector2f positions,FrameInfo &frameInfo) {
 //        ant1.move(help1.x * frameInfo.delta,help1.y * frameInfo.delta);
 //    }
 
+}
+
+sf::Vector2f AntGame::MaxCenter(FrameInfo &frameInfo) {
+    sf::Vector2f vectorHelp;
+    vectorHelp =  view1.getSize();
+    sf::Vector2f maximum;
+    maximum.x = vectorHelp.x/2;
+    maximum.y = vectorHelp.y/2;
+    return maximum;
+}
+
+sf::Vector2f AntGame::MinCenter(FrameInfo &frameInfo) {
+    sf::Vector2f vectorHelp;
+    sf::Vector2f minimum;
+    vectorHelp =  view1.getSize();
+    minimum.x = 3840 - vectorHelp.x/2;
+    minimum.y = 5400 - vectorHelp.y/2;
+    return minimum;
+}
+
+float AntGame::Clamp(float value, float max, float min) {
+    if(value < min)
+        return min;
+    if(value > max)
+        return max;
+    return value;
 }

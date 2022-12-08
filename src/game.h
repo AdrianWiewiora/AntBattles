@@ -22,9 +22,6 @@ private:
   GameState *m_current_state;
   FrameInfo frameInfo;
 
-//  int zoomViewAdd = 0;
-//  int zoomViewDel = 0;
-
   Menu menu;
   // Initialization
   void initWindow();

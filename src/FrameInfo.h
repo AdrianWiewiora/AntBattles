@@ -11,9 +11,6 @@
 class FrameInfo {
 public:
     double delta,mouseWheelDelta;
-    int zoomViewAdd = 0;
-    int zoomViewDel = 0;
-    sf::Vector2f setViewFrame();
 };
 
 

@@ -22,13 +22,15 @@ class AntGame : GameState {
 
     sf::Vector2f vectorF;
     sf::Vector2i vectorI;
-    sf::Vector2f vectorViewCenter;
 
 public:
-  AntGame();
-  virtual void Render(sf::RenderWindow *window) override;
-  virtual void Input(sf::RenderWindow *window) override;
-  virtual void Update(sf::RenderWindow *window, FrameInfo &frameInfo)  override;
+    AntGame();
+    virtual void Render(sf::RenderWindow *window) override;
+    virtual void Input(sf::RenderWindow *window) override;
+    virtual void Update(sf::RenderWindow *window, FrameInfo &frameInfo)  override;
 
-  void MoveAnts(sf::Vector2f positions,FrameInfo &frameInfo);
+    void MoveAnts(sf::Vector2f positions,FrameInfo &frameInfo);
+    sf::Vector2f MaxCenter(FrameInfo &frameInfo);
+    sf::Vector2f MinCenter(FrameInfo &frameInfo);
+    float Clamp(float value, float max, float min);
 };

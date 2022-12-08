@@ -3,8 +3,8 @@
 #include "SFML/Graphics/Color.hpp"
 
 void Game::initWindow() {
-  // this->window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "Little Big Strategy",sf::Style::Fullscreen);
-  this->window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "Little Big Strategy");
+    //this->window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "Little Big Strategy",sf::Style::Fullscreen);
+    this->window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "Little Big Strategy");
 }
 
 Game::Game() {
@@ -19,20 +19,7 @@ void Game::updateSFMLEvents() {
     {
         switch(sfEvent.type){
             case sf::Event::MouseWheelScrolled:
-                if(sfEvent.mouseWheelScroll.delta >=0){
-                    if(frameInfo.zoomViewAdd < 8 && frameInfo.zoomViewAdd >= -8){
-                        frameInfo.mouseWheelDelta += sfEvent.mouseWheelScroll.delta;
-                        frameInfo.zoomViewAdd += 1;
-                        frameInfo.zoomViewDel += 1;
-                    }
-                }
-                else{
-                    if(frameInfo.zoomViewDel > -8 && frameInfo.zoomViewDel <= 8){
-                        frameInfo.mouseWheelDelta += sfEvent.mouseWheelScroll.delta;
-                        frameInfo.zoomViewDel -= 1;
-                        frameInfo.zoomViewAdd -= 1;
-                    }
-                }
+                frameInfo.mouseWheelDelta += sfEvent.mouseWheelScroll.delta;
                 break;
             case sf::Event::Closed:
                 window->close();
