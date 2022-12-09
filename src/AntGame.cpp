@@ -31,7 +31,7 @@ AntGame::AntGame() {
 void AntGame::Input(sf::RenderWindow *window) {}
 void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
 
-    //Function steering zoom itd
+    //Function steering zoom/view size
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageUp))view1.zoom(-1.1f * frameInfo.delta +1);
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageDown)) view1.zoom(1.1f * frameInfo.delta +1);
     view1.zoom(1.0 +frameInfo.mouseWheelDelta * -0.1);
@@ -41,7 +41,7 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
     float sizeY = Clamp(vectorViewSize.y,2160,540);
     view1.setSize(sizeX,sizeY);
 
-    //Function steering Center itd
+    //Function steering View Center itd
     float move = 500 * frameInfo.delta;
     sf::Vector2f vectorCenterMax = MaxCenter(frameInfo);
     sf::Vector2f vectorCenterMin = MinCenter(frameInfo);
@@ -55,28 +55,32 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
     float y = Clamp(view1.getCenter().y,vectorCenterMin.y,vectorCenterMax.y);
     view1.setCenter(x,y);
 
-    
+
     //Funkcje pozostale
 
-/*    void GameObject::rotateToMouse()
-    {
-        Vector2f currentPosition = sprite.getPosition();
-        Vector2i mousePosition = Mouse::getPosition();
+
+
+
+    if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+        sf::Vector2f helpPos;
+        sf::Vector2f currentPosition = ant1.getPosition();
+        sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
+        helpPos = window->mapPixelToCoords(mousePosition);
 
         const float PI = 3.14159265;
 
-        float a = currentPosition.x - mousePosition.x;
-        float b = currentPosition.y - mousePosition.y;
+        float a = currentPosition.x - helpPos.x;
+        float b = currentPosition.y - helpPos.y;
 
         float rotation = ( atan2( b, a ) ) * 180 / PI;
+        rotation -= 90;
 
-        sprite.setRotation( rotation );
-    }*/
+        ant1.setRotation( rotation );
 
-    if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+
         vectorI = sf::Mouse::getPosition(*window);
         vectorF = window->mapPixelToCoords(vectorI);
-        MoveAnts(vectorF,frameInfo);
+        //MoveAnts(vectorF,frameInfo);
 
         //ant1.move(sf::Vector2f(vectorF * float(frameInfo.delta)));
         //ant1.move(sf::Vector2f(vector.x*frameInfo.delta,vector.y*frameInfo.delta));
