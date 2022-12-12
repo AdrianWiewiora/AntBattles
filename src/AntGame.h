@@ -10,16 +10,16 @@
 #include <iostream>
 #include <cmath>
 #include "FrameInfo.h"
+#include "Ant.h"
 
 
 class AntGame : GameState {
     sf::RectangleShape tlo;
-    sf::Sprite ant1;
     sf::Texture Torf;
-    sf::Texture t;
     sf::View view1;
     sf::Event event;
     float viewWidth = 1920,viewHeight = 1080;
+    Ant ant1;
 
     sf::Vector2f vectorF;
     sf::Vector2i vectorI;
@@ -30,7 +30,6 @@ public:
     virtual void Input(sf::RenderWindow *window) override;
     virtual void Update(sf::RenderWindow *window, FrameInfo &frameInfo)  override;
 
-    void MoveAnts(sf::Vector2f positions,FrameInfo &frameInfo);
     sf::Vector2f MaxCenter(FrameInfo &frameInfo);
     sf::Vector2f MinCenter(FrameInfo &frameInfo);
     float Clamp(float value, float max, float min);
