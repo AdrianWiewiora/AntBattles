@@ -11,7 +11,7 @@ private:
 public:
     Ant();
     sf::Vector2f getPositionAnt();
-    void setRotationAnt(float rotationAnt);
+    void setRotationAnt(sf::RenderWindow *window);
     void rotationSteering(FrameInfo &frameInfo);
     void moveKeyboard(FrameInfo &frameInfo);
     void drawAnt(sf::RenderWindow *window);

@@ -33,7 +33,6 @@ private:
 public:
     MenuOptions();
     void Render(sf::RenderWindow *window) override;
-    void Input(sf::RenderWindow *window) override;
     void Update(sf::RenderWindow *window, FrameInfo &frameInfo) override;
 
     static sf::Vector2f round(sf::Vector2f vector);

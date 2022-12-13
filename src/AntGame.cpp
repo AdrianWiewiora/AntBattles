@@ -9,7 +9,6 @@ AntGame::AntGame() {
     view1.setCenter(1920,2700);
 }
 
-void AntGame::Input(sf::RenderWindow *window) {}
 void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
     //Function steering zoom/view size
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageUp))view1.zoom(-1.1f * frameInfo.delta +1);
@@ -39,23 +38,10 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
     ant1.rotationSteering(frameInfo);
     ant1.moveKeyboard(frameInfo);
 
-    //Funkcje pozostale
-
     if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-        sf::Vector2f helpPos;
-        sf::Vector2f currentPosition = ant1.getPositionAnt();
         sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
-        helpPos = window->mapPixelToCoords(mousePosition);
-
-        const float PI = 3.14159265;
-        float a = currentPosition.x - helpPos.x;
-        float b = currentPosition.y - helpPos.y;
-        float rotation = ( atan2( b, a ) ) * 180 / PI;
-        rotation -= 90;
-        ant1.setRotationAnt( rotation );
-
+        ant1.setRotationAnt( window);
         ant1.targetPosition = window->mapPixelToCoords(mousePosition);
-
     }
     ant1.moveAnt(frameInfo,window);
 

@@ -19,8 +19,17 @@ sf::Vector2f Ant::getPositionAnt() {
     return ant.getPosition();
 }
 
-void Ant::setRotationAnt(float rotationAnt) {
-    ant.setRotation(rotationAnt);
+void Ant::setRotationAnt(sf::RenderWindow *window) {
+    sf::Vector2f helpPos;
+    sf::Vector2f currentPosition = ant.getPosition();
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
+    helpPos = window->mapPixelToCoords(mousePosition);
+    const float PI = 3.14159265;
+    float a = currentPosition.x - helpPos.x;
+    float b = currentPosition.y - helpPos.y;
+    float rotation = ( atan2( b, a ) ) * 180 / PI;
+    rotation -= 90;
+    ant.setRotation(rotation);
 }
 
 void Ant::drawAnt(sf::RenderWindow *window) {

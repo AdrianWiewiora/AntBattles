@@ -30,6 +30,5 @@ private:
 public:
     Menu();
     virtual void Render(sf::RenderWindow *window) override;
-    virtual void Input(sf::RenderWindow *window) override;
     virtual void Update(sf::RenderWindow *window, FrameInfo &frameInfo) override;
 };

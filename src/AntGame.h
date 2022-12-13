@@ -21,13 +21,9 @@ class AntGame : GameState {
     float viewWidth = 1920,viewHeight = 1080;
     Ant ant1;
 
-    sf::Vector2f vectorF;
-    sf::Vector2i vectorI;
-
 public:
     AntGame();
     virtual void Render(sf::RenderWindow *window) override;
-    virtual void Input(sf::RenderWindow *window) override;
     virtual void Update(sf::RenderWindow *window, FrameInfo &frameInfo)  override;
 
     sf::Vector2f MaxCenter(FrameInfo &frameInfo);

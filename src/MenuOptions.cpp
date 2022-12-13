@@ -2,11 +2,8 @@
 // Created by Adrian on 19.11.2022.
 //
 
-
 #include "MenuOptions.h"
 
-
-void MenuOptions::Input(sf::RenderWindow *window) {}
 void MenuOptions::Update(sf::RenderWindow *window, FrameInfo &frameInfo) {
 
     if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){

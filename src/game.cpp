@@ -85,7 +85,6 @@ void Game::run() {
     frameInfo.mouseWheelDelta = 0;
     updateSFMLEvents();
     window->clear(sf::Color::Black);
-    m_current_state->Input(window);
     m_current_state->Update(window, frameInfo);
     m_current_state->Render(window);
     window->display();

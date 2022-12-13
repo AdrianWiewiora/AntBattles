@@ -15,7 +15,6 @@
 
 class Game {
 private:
-  // Variables
   sf::RenderWindow *window{};
   sf::Event sfEvent{};
   sf::Clock clock;
@@ -23,16 +22,12 @@ private:
   FrameInfo frameInfo;
 
   Menu menu;
-  // Initialization
   void initWindow();
 
 public:
-  // Constructors
   Game();
 
-  // Functions
   void updateSFMLEvents();
   void update();
-  //void render();
   void run();
 };

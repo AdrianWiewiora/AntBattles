@@ -6,7 +6,6 @@ Menu::Menu() {
     Tlo.setTexture(&Mrowka);
 }
 
-void Menu::Input(sf::RenderWindow *window) {}
 void Menu::Update(sf::RenderWindow *window, FrameInfo &frameInfo) {
     m_lifetime -= frameInfo.delta;
 
