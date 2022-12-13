@@ -11,6 +11,8 @@ Ant::Ant() {
     ant.setOrigin(sf::Vector2f(ant.getTexture()->getSize().x * 0.5,ant.getTexture()->getSize().y * 0.5));
     ant.setScale(sf::Vector2f(0.2f, 0.2f));
     ant.setPosition(1000, 1500);
+    targetPosition.x = 1000;
+    targetPosition.y = 1500;
 }
 
 sf::Vector2f Ant::getPositionAnt() {
