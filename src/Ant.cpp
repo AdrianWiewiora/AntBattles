@@ -76,21 +76,28 @@ void Ant::moveKeyboard(FrameInfo &frameInfo) {
 }
 
 void Ant::moveAnt(FrameInfo &frameInfo,sf::RenderWindow *window) {
-    sf::Vector2f helpPos;
-    sf::Vector2f currentPosition = ant.getPosition();
-    sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
-    float a,b,distance,sinA,sinB,alfa,beta,Pi = 3.14159265359;
-    helpPos = window->mapPixelToCoords(mousePosition);
-    a = helpPos.x - currentPosition.x;
-    b = currentPosition.y - helpPos.y;
-    distance = a*a + b*b;
-    distance = sqrtf(distance);
-    sinA = b/distance;
-    sinB = a / distance;
-    alfa = asinf(sinA);
-    beta = asinf(sinB);
-    alfa = alfa * (180/Pi);
-    beta = beta * (180/Pi);
 
-    ant.move((beta/90) *frameInfo.delta *1000,(alfa/90)*frameInfo.delta * -1000);
+    sf::Vector2f currentPosition = ant.getPosition();
+//    sf::Vector2f helpPos;
+//    sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
+//    float a,b,distance,sinA,sinB,alfa,beta,Pi = 3.14159265359;
+//    helpPos = window->mapPixelToCoords(mousePosition);
+//    a = helpPos.x - currentPosition.x;
+//    b = currentPosition.y - helpPos.y;
+//    distance = a*a + b*b;
+//    distance = sqrtf(distance);
+//    sinA = b/distance;
+//    sinB = a / distance;
+//    alfa = asinf(sinA);
+//    beta = asinf(sinB);
+//    alfa = alfa * (180/Pi);
+//    beta = beta * (180/Pi);
+    //ant.move((beta/90) *frameInfo.delta *1000,(alfa/90)*frameInfo.delta * -1000);
+
+    sf::Vector2f normalized = (targetPosition - currentPosition);
+    float distance = std::sqrt(normalized.x * normalized.x + normalized.y * normalized.y);
+    if(distance > 20.f){
+        normalized /= distance;
+        ant.move(normalized * (float)frameInfo.delta * 1000.f);
+    }
 }

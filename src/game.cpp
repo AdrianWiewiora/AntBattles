@@ -77,7 +77,7 @@ void Game::run() {
   while (window->isOpen()) {
       frameInfo.delta = time.restart().asSeconds();
     if (m_current_state->getQueuedGameState() != nullptr) {
-      auto t = m_current_state->getQueuedGameState();
+      GameState* t = m_current_state->getQueuedGameState();
       delete m_current_state;
       m_current_state = t;
     }

@@ -11,15 +11,15 @@ void MenuOptions::Update(sf::RenderWindow *window, FrameInfo &frameInfo) {
 
     if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
         if(sf::Mouse::getPosition().x < 1110 && sf::Mouse::getPosition().x > 810 && sf::Mouse::getPosition().y > 300 && sf::Mouse::getPosition().y < 370){
-            GameState::mDifficultLevel = 1;
+            GameState::mDifficultyLevel = 1;
             m_queued_game_state = (GameState *)new Menu();
         }
         if(sf::Mouse::getPosition().x < 1110 && sf::Mouse::getPosition().x > 810 && sf::Mouse::getPosition().y > 400 && sf::Mouse::getPosition().y < 470){
-            GameState::mDifficultLevel = 2;
+            GameState::mDifficultyLevel = 2;
             m_queued_game_state = (GameState *)new Menu();
         }
         if(sf::Mouse::getPosition().x < 1110 && sf::Mouse::getPosition().x > 810 && sf::Mouse::getPosition().y > 500 && sf::Mouse::getPosition().y < 570){
-            GameState::mDifficultLevel = 3;
+            GameState::mDifficultyLevel = 3;
             m_queued_game_state = (GameState *)new Menu();
         }
     }

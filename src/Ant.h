@@ -16,6 +16,7 @@ public:
     void moveKeyboard(FrameInfo &frameInfo);
     void drawAnt(sf::RenderWindow *window);
     void moveAnt(FrameInfo &frameInfo, sf::RenderWindow *window);
+    sf::Vector2f targetPosition;
 };
 
 

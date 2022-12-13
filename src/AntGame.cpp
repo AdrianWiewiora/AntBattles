@@ -54,10 +54,10 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
         rotation -= 90;
         ant1.setRotationAnt( rotation );
 
-        vectorI = sf::Mouse::getPosition(*window);
-        vectorF = window->mapPixelToCoords(vectorI);
-        ant1.moveAnt(frameInfo,window);
+        ant1.targetPosition = window->mapPixelToCoords(mousePosition);
+
     }
+    ant1.moveAnt(frameInfo,window);
 
 }
 
