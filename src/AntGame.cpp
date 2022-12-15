@@ -45,12 +45,17 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
     }
     ant1.moveAnt(frameInfo,window);
 
+    //Function gameBar
+    gameBar.setGameBar(view1);
+
 }
+
 
 void AntGame::Render(sf::RenderWindow *window) {
     window->setView(view1);
     window->draw(tlo);
     ant1.drawAnt(window);
+    gameBar.drawGameBar(window);
 }
 
 sf::Vector2f AntGame::MaxCenter(FrameInfo &frameInfo) {
@@ -58,7 +63,7 @@ sf::Vector2f AntGame::MaxCenter(FrameInfo &frameInfo) {
     vectorHelp =  view1.getSize();
     sf::Vector2f maximum;
     maximum.x = vectorHelp.x/2;
-    maximum.y = vectorHelp.y/2;
+    maximum.y = vectorHelp.y/2  - gameBar.getSizeGameBar().y;
     return maximum;
 }
 

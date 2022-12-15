@@ -11,20 +11,25 @@
 #include <cmath>
 #include "FrameInfo.h"
 #include "Ant.h"
+#include "gameBar.h"
 
 
 class AntGame : GameState {
+private:
     sf::RectangleShape tlo;
     sf::Texture Torf;
     sf::View view1;
     sf::Event event;
     float viewWidth = 1920,viewHeight = 1080;
     Ant ant1;
+    gameBar gameBar;
 
 public:
     AntGame();
     virtual void Render(sf::RenderWindow *window) override;
     virtual void Update(sf::RenderWindow *window, FrameInfo &frameInfo)  override;
+
+//    static sf::Vector2f round(sf::Vector2f vector);
 
     sf::Vector2f MaxCenter(FrameInfo &frameInfo);
     sf::Vector2f MinCenter(FrameInfo &frameInfo);
