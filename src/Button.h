@@ -29,6 +29,9 @@ public:
     Button(float posX, float posY, const std::string &Text);
 
     int buttonClicked(sf::RenderWindow *window);
+    int buttonClickedMap(sf::RenderWindow *window,float widthX, float heightY);
+
+    void setButton(float positionX, float positionY, float widthX, float heightY);
 };
 
 

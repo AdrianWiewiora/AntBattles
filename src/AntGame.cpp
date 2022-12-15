@@ -2,14 +2,28 @@
 
 
 AntGame::AntGame() {
-    Torf.loadFromFile("../images/mapTexture1.png");
+    Torf.loadFromFile("../images/mapTexture2.png");
     tlo.setSize(sf::Vector2f(3840.0, 5400.0));
     tlo.setTexture(&Torf);
+
+    greenResourceTexture.loadFromFile("../images/greenResources.png");
+    greenResourceTextureBW.loadFromFile("../images/greenResourcesBW.png");
+    blueResourceTexture.loadFromFile("../images/blueResources.png");
+    blueResourceTextureBW.loadFromFile("../images/blueResourcesBW.png");
+    greenResourcesRS.setSize(sf::Vector2f(100.0, 100.0));
+    blueResourcesRS.setSize(sf::Vector2f(100.0, 100.0));
+    greenResourcesRS.setTexture(&greenResourceTexture);
+    greenResourcesRS.setOrigin(50,50);
+    blueResourcesRS.setTexture(&blueResourceTexture);
+    blueResourcesRS.setOrigin(50,50);
+
     view1.setSize(viewWidth,viewHeight);
     view1.setCenter(1920,2700);
 }
 
 void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
+    //Time counter
+    time += frameInfo.delta;
     //Function steering zoom/view size
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageUp))view1.zoom(-1.1f * frameInfo.delta +1);
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::PageDown)) view1.zoom(1.1f * frameInfo.delta +1);
@@ -35,25 +49,52 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
     view1.setCenter(x,y);
 
     //Function steering ants
-    ant1.rotationSteering(frameInfo);
-    ant1.moveKeyboard(frameInfo);
-
     if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
         sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
-        ant1.setRotationAnt( window);
+        ant1.setRotationAnt(window);
         ant1.targetPosition = window->mapPixelToCoords(mousePosition);
     }
     ant1.moveAnt(frameInfo,window);
 
-    //Function gameBar
-    gameBar.setGameBar(view1);
+    //Function GameBar
+    gameBar.setGameBar(view1,window);
 
+    //Function green resource
+    greenResourcesRS.setPosition(800,360);
+    if(time > timeHelpGreenResources){
+        timeHelpGreenResources = 0;
+        greenResourcesRS.setTexture(&greenResourceTexture);
+        if(ant1.getPositionAnt().x <= greenResourcesRS.getPosition().x+50 && ant1.getPositionAnt().x >= greenResourcesRS.getPosition().x-50){
+            if(ant1.getPositionAnt().y <= greenResourcesRS.getPosition().y+50 && ant1.getPositionAnt().y >= greenResourcesRS.getPosition().y-50){
+                timeHelpGreenResources += (time+1);
+                gameBar.setGreenResource();
+                greenResourcesRS.setTexture(&greenResourceTextureBW);
+            }
+        }
+    }
+    //Function blue resource
+    blueResourcesRS.setPosition(2700,2000);
+    if(time > timeHelpBlueResources){
+        timeHelpBlueResources = 0;
+        blueResourcesRS.setTexture(&blueResourceTexture);
+        if(ant1.getPositionAnt().x <= blueResourcesRS.getPosition().x+50 && ant1.getPositionAnt().x >= blueResourcesRS.getPosition().x-50){
+            if(ant1.getPositionAnt().y <= blueResourcesRS.getPosition().y+50 && ant1.getPositionAnt().y >= blueResourcesRS.getPosition().y-50){
+                timeHelpBlueResources += (time+1);
+                gameBar.setBlueResource();
+                blueResourcesRS.setTexture(&blueResourceTextureBW);
+            }
+        }
+    }
+    //Function HP
+    gameBar.setHp(ant1.getPositionAnt(),time);
 }
 
 
 void AntGame::Render(sf::RenderWindow *window) {
     window->setView(view1);
     window->draw(tlo);
+    window->draw(greenResourcesRS);
+    window->draw(blueResourcesRS);
     ant1.drawAnt(window);
     gameBar.drawGameBar(window);
 }

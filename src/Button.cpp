@@ -39,3 +39,29 @@ int Button::buttonClicked(sf::RenderWindow *window) {
     }
     else return 0;
 }
+
+void Button::setButton(float positionX, float positionY, float widthX, float heightY) {
+    mButton.setSize(sf::Vector2f(widthX,heightY));
+    mButton.setOrigin(widthX/2,heightY/2);
+
+    auto center = mText.getGlobalBounds().getSize() / 2.f;
+    auto localBounds = center + mText.getLocalBounds().getPosition();
+    auto rounded = round(localBounds);
+    mText.setOrigin(rounded);
+    mText.setCharacterSize(heightY);
+
+    mButton.setPosition(positionX,positionY);
+    mText.setPosition(positionX,positionY);
+
+    positions = mButton.getPosition();
+}
+
+int Button::buttonClickedMap(sf::RenderWindow *window,float widthX, float heightY) {
+    sf::Vector2f helpPos;
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
+    helpPos = window->mapPixelToCoords(mousePosition);
+    if(helpPos.x < (positions.x + widthX/2) && helpPos.x > (positions.x - widthX/2) && helpPos.y < (positions.y + heightY/2) && helpPos.y > (positions.y - heightY/2)){
+        return 1;
+    }
+    else return 0;
+}
