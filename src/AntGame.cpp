@@ -87,6 +87,11 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
     }
     //Function HP
     gameBar.setHp(ant1.getPositionAnt(),time);
+
+    //Function UpgradeMenu
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::E)){
+
+    }
 }
 
 

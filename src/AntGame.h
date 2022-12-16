@@ -12,6 +12,7 @@
 #include "FrameInfo.h"
 #include "Ant.h"
 #include "GameBar.h"
+#include "UpgradeMenu.h"
 
 
 class AntGame : GameState {

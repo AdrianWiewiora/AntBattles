@@ -118,7 +118,6 @@ void GameBar::setBlueResource() {
 }
 
 void GameBar::setHp(sf::Vector2f ant,double timeGame) {
-
     if(timeGame > timeHelpHp){
         timeHelpHp = 0;
         if(hpAmount<100){
