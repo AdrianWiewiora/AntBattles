@@ -19,6 +19,25 @@ AntGame::AntGame() {
 
     view1.setSize(viewWidth,viewHeight);
     view1.setCenter(1920,2700);
+
+    for(auto & i : redResourcesRS){
+        i.setSize(sf::Vector2f(100.0, 100.0));
+        i.setTexture(&blueResourceTexture);
+        i.setOrigin(50,50);
+        i.setPosition(rand()%3840,rand()%5400);
+    }
+
+    //delete blackResourcesRS;
+
+    //sf::RectangleShape* blackResourcesRS = new sf::RectangleShape;
+//    blackResourcesRS->setTexture(&greenResourceTexture);
+//    blackResourcesRS->setOrigin(50,50);
+//    blackResourcesRS->setPosition(1000,1600);
+//    std::cout<<blackResourcesRS;
+//    blackResourcesRS->setPosition(rand()%3840,rand()%5400);
+
+
+
 }
 
 void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
@@ -36,8 +55,8 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
 
     //Function steering View Center itd
     float move = 500 * frameInfo.delta;
-    sf::Vector2f vectorCenterMax = MaxCenter(frameInfo);
-    sf::Vector2f vectorCenterMin = MinCenter(frameInfo);
+    sf::Vector2f vectorCenterMax = MaxCenter();
+    sf::Vector2f vectorCenterMin = MinCenter();
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) view1.move(0,-move);
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) view1.move(-move,0);
@@ -89,6 +108,15 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
     //Function HP
     gameBar.setHp(ant1.getPositionAnt(),time);
 
+    //Function Red resources
+    for(auto & i : redResourcesRS){
+        if(ant1.getPositionAnt().x <= i.getPosition().x+50 && ant1.getPositionAnt().x >= i.getPosition().x-50){
+            if(ant1.getPositionAnt().y <= i.getPosition().y+50 && ant1.getPositionAnt().y >= i.getPosition().y-50){
+                gameBar.setBlueResource();
+            }
+        }
+    }
+
     //Function UpgradeMenu
     if(frameInfo.keyPressed == sf::Keyboard::E){
         if(mUpgradeMenuExist == 1) mUpgradeMenuExist = 0;
@@ -96,6 +124,17 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
     }
     frameInfo.keyPressed = 0;
     if(mUpgradeMenuExist==1) mUpgradeMenu.showUpgradeMenu(view1);
+
+
+//    blackResourcesRS->setTexture(&greenResourceTexture);
+//    blackResourcesRS->setOrigin(50,50);
+//    blackResourcesRS->setPosition(1000,1600);
+//    window->draw(*blackResourcesRS);
+//    std::cout<<blackResourcesRS;
+//
+//    if(blackResourcesRS == nullptr){
+//        //std::cout<<"dupa";
+//    }
 
 }
 
@@ -105,12 +144,19 @@ void AntGame::Render(sf::RenderWindow *window) {
     window->draw(tlo);
     window->draw(greenResourcesRS);
     window->draw(blueResourcesRS);
+    for(auto & i : redResourcesRS) window->draw(i);
     ant1.drawAnt(window);
     gameBar.drawGameBar(window);
     if(mUpgradeMenuExist==1) mUpgradeMenu.drawUpgradeMenu(window);
+
+//    std::cout<<blackResourcesRS<<std::endl;
+//    if(blackResourcesRS != nullptr){
+//        window->draw(*blackResourcesRS);
+//    }
+
 }
 
-sf::Vector2f AntGame::MaxCenter(FrameInfo &frameInfo) {
+sf::Vector2f AntGame::MaxCenter() {
     sf::Vector2f vectorHelp;
     vectorHelp =  view1.getSize();
     sf::Vector2f maximum;
@@ -119,7 +165,7 @@ sf::Vector2f AntGame::MaxCenter(FrameInfo &frameInfo) {
     return maximum;
 }
 
-sf::Vector2f AntGame::MinCenter(FrameInfo &frameInfo) {
+sf::Vector2f AntGame::MinCenter() {
     sf::Vector2f vectorHelp;
     sf::Vector2f minimum;
     vectorHelp =  view1.getSize();
@@ -134,4 +180,8 @@ float AntGame::Clamp(float value, float max, float min) {
     if(value > max)
         return max;
     return value;
+}
+
+AntGame::~AntGame() {
+    delete blackResourcesRS;
 }
