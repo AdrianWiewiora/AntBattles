@@ -3,8 +3,8 @@
 #include "SFML/Graphics/Color.hpp"
 
 void Game::initWindow() {
-    this->window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "Little Big Strategy",sf::Style::Fullscreen);
-    //this->window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "Little Big Strategy");
+    //this->window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "Little Big Strategy",sf::Style::Fullscreen);
+    this->window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "Little Big Strategy");
 }
 
 Game::Game() {
@@ -33,6 +33,10 @@ void Game::updateSFMLEvents() {
             case sf::Event::TextEntered:
                 break;
             case sf::Event::KeyPressed:
+                if (sfEvent.key.code == sf::Keyboard::E)
+                {
+                    frameInfo.keyPressed = sf::Keyboard::E;
+                }
                 break;
             case sf::Event::KeyReleased:
                 break;

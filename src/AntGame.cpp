@@ -49,13 +49,14 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
     view1.setCenter(x,y);
 
     //Function steering ants
-    if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-        sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
-        ant1.setRotationAnt(window);
-        ant1.targetPosition = window->mapPixelToCoords(mousePosition);
+    if(mUpgradeMenuExist==0){
+        if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+            sf::Vector2i mousePosition = sf::Mouse::getPosition(*window);
+            ant1.setRotationAnt(window);
+            ant1.targetPosition = window->mapPixelToCoords(mousePosition);
+        }
+        ant1.moveAnt(frameInfo,window);
     }
-    ant1.moveAnt(frameInfo,window);
-
     //Function GameBar
     gameBar.setGameBar(view1,window);
 
@@ -89,9 +90,13 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
     gameBar.setHp(ant1.getPositionAnt(),time);
 
     //Function UpgradeMenu
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::E)){
-
+    if(frameInfo.keyPressed == sf::Keyboard::E){
+        if(mUpgradeMenuExist == 1) mUpgradeMenuExist = 0;
+        else mUpgradeMenuExist = 1;
     }
+    frameInfo.keyPressed = 0;
+    if(mUpgradeMenuExist==1) mUpgradeMenu.showUpgradeMenu(view1);
+
 }
 
 
@@ -102,6 +107,7 @@ void AntGame::Render(sf::RenderWindow *window) {
     window->draw(blueResourcesRS);
     ant1.drawAnt(window);
     gameBar.drawGameBar(window);
+    if(mUpgradeMenuExist==1) mUpgradeMenu.drawUpgradeMenu(window);
 }
 
 sf::Vector2f AntGame::MaxCenter(FrameInfo &frameInfo) {

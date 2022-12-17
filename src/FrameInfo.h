@@ -10,7 +10,8 @@
 
 class FrameInfo {
 public:
-    double delta,mouseWheelDelta;
+    float delta,mouseWheelDelta;
+    int keyPressed;
 };
 
 
