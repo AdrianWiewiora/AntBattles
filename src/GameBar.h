@@ -27,6 +27,7 @@ public:
     void setGreenResource();
     void setBlueResource();
     void setHp(sf::Vector2f antPosition,double timeGame);
+    void attackHP();
 };
 
 

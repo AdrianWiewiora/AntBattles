@@ -132,3 +132,11 @@ void GameBar::setHp(sf::Vector2f ant,double timeGame) {
         }
     }
 }
+
+void GameBar::attackHP() {
+    hpAmount-=0.1;
+    hpAmountTextBar.setString(std::to_string(hpAmount));
+    help = hpAmountTextBar.getString();
+    help1 = help + "\\100";
+    hpAmountTextBar.setString(help1);
+}

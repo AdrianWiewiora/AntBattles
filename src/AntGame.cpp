@@ -36,6 +36,8 @@ AntGame::AntGame() {
 //    std::cout<<blackResourcesRS;
 //    blackResourcesRS->setPosition(rand()%3840,rand()%5400);
 
+    //Enemys
+    enemies[0].setEnemy(ant1.getPositionAnt().x+500,ant1.getPositionAnt().y+500);
 
 
 }
@@ -113,6 +115,8 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
         if(ant1.getPositionAnt().x <= i.getPosition().x+50 && ant1.getPositionAnt().x >= i.getPosition().x-50){
             if(ant1.getPositionAnt().y <= i.getPosition().y+50 && ant1.getPositionAnt().y >= i.getPosition().y-50){
                 gameBar.setBlueResource();
+                i.setFillColor(sf::Color::Transparent);
+                i.setPosition(-100,-100);
             }
         }
     }
@@ -124,6 +128,15 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
     }
     frameInfo.keyPressed = 0;
     if(mUpgradeMenuExist==1) mUpgradeMenu.showUpgradeMenu(view1);
+
+    //Function Enemies
+    enemies[0].moveEnemy(frameInfo,window,ant1.getPositionAnt());
+    antPosition = ant1.getPositionAnt();
+    if(enemies[0].getPositionEnemy().x > antPosition.x-150 && enemies[0].getPositionEnemy().x < antPosition.x+150){
+        if(enemies[0].getPositionEnemy().y > antPosition.y-150 && enemies[0].getPositionEnemy().y < antPosition.y+150){
+            gameBar.attackHP();
+        }
+    }
 
 
 //    blackResourcesRS->setTexture(&greenResourceTexture);
@@ -146,6 +159,7 @@ void AntGame::Render(sf::RenderWindow *window) {
     window->draw(blueResourcesRS);
     for(auto & i : redResourcesRS) window->draw(i);
     ant1.drawAnt(window);
+    for(int i = 0;i<50;i++)enemies[0].drawEnemy(window);
     gameBar.drawGameBar(window);
     if(mUpgradeMenuExist==1) mUpgradeMenu.drawUpgradeMenu(window);
 
@@ -153,6 +167,8 @@ void AntGame::Render(sf::RenderWindow *window) {
 //    if(blackResourcesRS != nullptr){
 //        window->draw(*blackResourcesRS);
 //    }
+
+
 
 }
 

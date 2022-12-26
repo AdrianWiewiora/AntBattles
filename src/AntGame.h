@@ -10,6 +10,7 @@
 #include "Ant.h"
 #include "GameBar.h"
 #include "UpgradeMenu.h"
+#include "Enemy.h"
 
 
 
@@ -20,10 +21,12 @@ private:
     sf::View view1;
     float viewWidth = 1920,viewHeight = 1080;
     Ant ant1;
+    Enemy enemies[50];
     GameBar gameBar;
     double time=0,timeHelpGreenResources=0,timeHelpBlueResources=0;
     int mUpgradeMenuExist=0;
     UpgradeMenu mUpgradeMenu;
+    sf::Vector2f antPosition;
 
 public:
     AntGame();
