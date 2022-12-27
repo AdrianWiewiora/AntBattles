@@ -17,7 +17,7 @@ private:
     std::string help,help1;
     int blueResourcesAmount,greenResourcesAmount,hpAmount;
     Button m_Button1{1450.0,387.5,"Exit"};
-    double timeHelpHp = 0;
+    double timeHelpHp = 0,timeHelpHPAttack = 0;
 public:
     GameBar();
     static sf::Vector2f round(sf::Vector2f vector);
@@ -27,7 +27,8 @@ public:
     void setGreenResource();
     void setBlueResource();
     void setHp(sf::Vector2f antPosition,double timeGame);
-    void attackHP();
+    void attackHP(double timeGame);
+    int getHpAmount();
 };
 
 

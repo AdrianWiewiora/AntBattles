@@ -14,12 +14,19 @@ class Enemy {
 private:
     sf::Sprite enemy;
     sf::Texture textureAnt;
+    sf::Sprite *redAnt;
+    int hpEnemy = 10;
+    int hpTimeHelp;
 public:
     Enemy();
+    ~Enemy();
     sf::Vector2f getPositionEnemy();
     void drawEnemy(sf::RenderWindow *window);
     void moveEnemy(FrameInfo &frameInfo, sf::RenderWindow *window,sf::Vector2f targetPosition);
     void setEnemy(float x, float y);
+    void setHP(double timeGame);
+    sf::Sprite* getPtr();
+    int getHp();
 };
 
 

@@ -1,6 +1,7 @@
 #include "AntGame.h"
 
 
+
 AntGame::AntGame() {
     Torf.loadFromFile("../images/mapTexture2.png");
     tlo.setSize(sf::Vector2f(3840.0, 5400.0));
@@ -37,7 +38,10 @@ AntGame::AntGame() {
 //    blackResourcesRS->setPosition(rand()%3840,rand()%5400);
 
     //Enemys
-    enemies[0].setEnemy(ant1.getPositionAnt().x+500,ant1.getPositionAnt().y+500);
+    for(int h=0;h<5;h++){
+        enemies[h].setEnemy(rand()%3840,rand()%5400);
+    }
+
 
 
 }
@@ -109,6 +113,9 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
     }
     //Function HP
     gameBar.setHp(ant1.getPositionAnt(),time);
+    if(gameBar.getHpAmount() == 0){
+        m_queued_game_state = (GameState *)new Menu();
+    }
 
     //Function Red resources
     for(auto & i : redResourcesRS){
@@ -130,13 +137,19 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
     if(mUpgradeMenuExist==1) mUpgradeMenu.showUpgradeMenu(view1);
 
     //Function Enemies
-    enemies[0].moveEnemy(frameInfo,window,ant1.getPositionAnt());
-    antPosition = ant1.getPositionAnt();
-    if(enemies[0].getPositionEnemy().x > antPosition.x-150 && enemies[0].getPositionEnemy().x < antPosition.x+150){
-        if(enemies[0].getPositionEnemy().y > antPosition.y-150 && enemies[0].getPositionEnemy().y < antPosition.y+150){
-            gameBar.attackHP();
+    for(int j=0;j<5;j++){
+        if(enemies[j].getHp() != 0){
+            enemies[j].moveEnemy(frameInfo,window,ant1.getPositionAnt());
+            antPosition = ant1.getPositionAnt();
+            if(enemies[j].getPositionEnemy().x > antPosition.x-150 && enemies[j].getPositionEnemy().x < antPosition.x+150){
+                if(enemies[j].getPositionEnemy().y > antPosition.y-150 && enemies[j].getPositionEnemy().y < antPosition.y+150){
+                    gameBar.attackHP(time);
+                    enemies[j].setHP(time);
+                }
+            }
         }
     }
+
 
 
 //    blackResourcesRS->setTexture(&greenResourceTexture);
@@ -159,7 +172,7 @@ void AntGame::Render(sf::RenderWindow *window) {
     window->draw(blueResourcesRS);
     for(auto & i : redResourcesRS) window->draw(i);
     ant1.drawAnt(window);
-    for(int i = 0;i<50;i++)enemies[0].drawEnemy(window);
+    for(int i = 0;i<5;i++)enemies[i].drawEnemy(window);
     gameBar.drawGameBar(window);
     if(mUpgradeMenuExist==1) mUpgradeMenu.drawUpgradeMenu(window);
 
@@ -200,4 +213,5 @@ float AntGame::Clamp(float value, float max, float min) {
 
 AntGame::~AntGame() {
     delete blackResourcesRS;
+    delete enemy;
 }

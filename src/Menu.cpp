@@ -21,8 +21,8 @@ void Menu::Update(sf::RenderWindow *window, FrameInfo &frameInfo) {
         }
     }
 
-    if (m_lifetime <= 0.0)
-        m_queued_game_state = (GameState *)new AntGame();
+//    if (m_lifetime <= 0.0)
+//        m_queued_game_state = (GameState *)new AntGame();
 }
 void Menu::Render(sf::RenderWindow *window) {
     window->draw(Tlo);
