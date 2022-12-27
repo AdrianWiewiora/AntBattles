@@ -29,29 +29,17 @@ void Enemy::drawEnemy(sf::RenderWindow *window) {
     window->draw(*redAnt);
 }
 
-void Enemy::moveEnemy(FrameInfo &frameInfo, sf::RenderWindow *window,sf::Vector2f targetPosition) {
-//    sf::Vector2f currentPosition = enemy.getPosition();
-//    if(targetPosition.x-currentPosition.x > 0 ) targetPosition.x -= 50;
-//    else targetPosition.x += 50;
-//    if(targetPosition.y-currentPosition.y > 0 ) targetPosition.y -= 50;
-//    else targetPosition.y += 50;
-//    sf::Vector2f normalized = (targetPosition  - currentPosition);
-//    float distance = std::sqrt(normalized.x * normalized.x + normalized.y * normalized.y);
-//    if(distance > 20.f){
-//        normalized /= distance;
-//        enemy.move(normalized * (float)frameInfo.delta * 800.f);
-//    }
-//    //Rotation
-//    const float PI = 3.14159265;
-//    float a = currentPosition.x - targetPosition.x;
-//    float b = currentPosition.y - targetPosition.y;
-//    float rotation = ( atan2( b, a ) ) * 180 / PI;
-//    rotation -= 90;
-//    enemy.setRotation(rotation);
-
-
-    //Wskaxnik
+void Enemy::moveEnemy(FrameInfo &frameInfo, sf::RenderWindow *window, sf::Vector2f targetPosition, sf::Vector2f otherPosition[5]) {
+    //pointers
     sf::Vector2f currentPosition = redAnt->getPosition();
+
+    for(int h=0;h<5;h++){
+        if(otherPosition[h].x-currentPosition.x > 0 ) targetPosition.x -= 20;
+        else targetPosition.x +=20;
+        if(otherPosition[h].y-currentPosition.y > 0 ) targetPosition.y -= 20;
+        else targetPosition.y += 20;
+    }
+
     if(targetPosition.x-currentPosition.x > 0 ) targetPosition.x -= 50;
     else targetPosition.x += 50;
     if(targetPosition.y-currentPosition.y > 0 ) targetPosition.y -= 50;

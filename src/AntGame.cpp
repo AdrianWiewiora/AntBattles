@@ -139,7 +139,13 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
     //Function Enemies
     for(int j=0;j<5;j++){
         if(enemies[j].getHp() != 0){
-            enemies[j].moveEnemy(frameInfo,window,ant1.getPositionAnt());
+            for(int g=0;g<5;g++){
+                enemyPosition[g]=enemies[g].getPositionEnemy();
+                if(g==j){
+                    enemyPosition[g]=antPosition;
+                }
+            }
+            enemies[j].moveEnemy(frameInfo, window, ant1.getPositionAnt(), enemyPosition);
             antPosition = ant1.getPositionAnt();
             if(enemies[j].getPositionEnemy().x > antPosition.x-150 && enemies[j].getPositionEnemy().x < antPosition.x+150){
                 if(enemies[j].getPositionEnemy().y > antPosition.y-150 && enemies[j].getPositionEnemy().y < antPosition.y+150){

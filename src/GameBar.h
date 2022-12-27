@@ -7,15 +7,15 @@
 
 class GameBar {
 private:
-    sf::RectangleShape resourcesBar,hpOnGameBar;
-    sf::Vector2f sizeResourcesBar,sizeHpIcon;
+    sf::RectangleShape resourcesBar,hpOnGameBar, attackPlayer, attackEnemy;
+    sf::Vector2f sizeResourcesBar,sizeHpIcon, sizeAttackIcon;
     sf::CircleShape blueResources;
     sf::CircleShape greenResources;
-    sf::Text blueResourcesAmountBar,greenResourcesAmountBar,hpAmountTextBar;
+    sf::Text blueResourcesAmountBar,greenResourcesAmountBar,hpAmountTextBar,attackPlayerAmountBar,attackEnemyAmountBar;
     sf::Font mFont;
-    sf::Texture textureHpIcon;
+    sf::Texture textureHpIcon, textureAttackPlayer, textureAttackEnemy;
     std::string help,help1;
-    int blueResourcesAmount,greenResourcesAmount,hpAmount;
+    int blueResourcesAmount,greenResourcesAmount,hpAmount,attackPlayerAmount,attackEnemyAmount;
     Button m_Button1{1450.0,387.5,"Exit"};
     double timeHelpHp = 0,timeHelpHPAttack = 0;
 public:

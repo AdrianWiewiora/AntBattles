@@ -27,7 +27,7 @@ private:
     double time=0,timeHelpGreenResources=0,timeHelpBlueResources=0;
     int mUpgradeMenuExist=0;
     UpgradeMenu mUpgradeMenu;
-    sf::Vector2f antPosition;
+    sf::Vector2f antPosition, enemyPosition[5];
 
 public:
     AntGame();

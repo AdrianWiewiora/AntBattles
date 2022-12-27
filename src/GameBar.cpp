@@ -45,6 +45,28 @@ GameBar::GameBar() {
     hpAmountTextBar.setCharacterSize(20);
     hpAmountTextBar.setFont(mFont);
     hpAmountTextBar.setFillColor(sf::Color::Black);
+
+    //AttackOnGameBar
+    textureAttackEnemy.loadFromFile("../images/attackiconEnemy.png");
+    textureAttackPlayer.loadFromFile("../images/attackIconPlayer.png");
+    attackEnemy.setTexture(&textureAttackEnemy);
+    attackPlayer.setTexture(&textureAttackPlayer);
+    sizeAttackIcon.x = 200;
+    sizeAttackIcon.y = 200;
+    attackEnemy.setSize(sizeAttackIcon);
+    attackPlayer.setSize(sizeAttackIcon);
+    attackEnemyAmount = 1;
+    attackPlayerAmount = 5;
+    attackPlayerAmountBar.setString(std::to_string(attackPlayerAmount));
+    attackEnemyAmountBar.setString(std::to_string(attackEnemyAmount));
+    attackPlayerAmountBar.setCharacterSize(20);
+    attackPlayerAmountBar.setFont(mFont);
+    attackPlayerAmountBar.setFillColor(sf::Color::Black);
+    attackEnemyAmountBar.setCharacterSize(20);
+    attackEnemyAmountBar.setFont(mFont);
+    attackEnemyAmountBar.setFillColor(sf::Color::Black);
+
+
 }
 
 void GameBar::drawGameBar(sf::RenderWindow *window) {
@@ -55,6 +77,10 @@ void GameBar::drawGameBar(sf::RenderWindow *window) {
     window->draw(greenResourcesAmountBar);
     window->draw(hpOnGameBar);
     window->draw(hpAmountTextBar);
+    window->draw(attackPlayer);
+    window->draw(attackEnemy);
+    window->draw(attackEnemyAmountBar);
+    window->draw(attackPlayerAmountBar);
     m_Button1.Render(window);
 }
 
@@ -105,6 +131,22 @@ void GameBar::setGameBar(sf::View view,sf::RenderWindow *window) {
             window->close();
         }
     }
+
+    //Function attack Player
+    attackPlayer.setSize(sf::Vector2f(sizeResourcesBar.y / 1.1,sizeResourcesBar.y / 1.1));
+    attackPlayer.setOrigin(attackPlayer.getSize().x,attackPlayer.getSize().y);
+    attackPlayer.setPosition(resourcesBar.getPosition().x + 7.2 * (resourcesBar.getSize().x / 30),resourcesBar.getPosition().y + (resourcesBar.getSize().y)/1.008);
+    attackPlayerAmountBar.setOrigin(rounded);
+    attackPlayerAmountBar.setPosition(resourcesBar.getPosition().x + 7.5 * (resourcesBar.getSize().x / 30),resourcesBar.getPosition().y + (resourcesBar.getSize().y / 2));
+    attackPlayerAmountBar.setCharacterSize(resourcesBar.getSize().y);
+
+    //Function attack Enemy
+    attackEnemy.setSize(sf::Vector2f(sizeResourcesBar.y / 1.1,sizeResourcesBar.y / 1.1));
+    attackEnemy.setOrigin(attackEnemy.getSize().x,attackEnemy.getSize().y);
+    attackEnemy.setPosition(resourcesBar.getPosition().x + 15 * (resourcesBar.getSize().x / 30),resourcesBar.getPosition().y + (resourcesBar.getSize().y)/1.008);
+    attackEnemyAmountBar.setOrigin(rounded);
+    attackEnemyAmountBar.setPosition(resourcesBar.getPosition().x + 15.5 * (resourcesBar.getSize().x / 30),resourcesBar.getPosition().y + (resourcesBar.getSize().y / 2));
+    attackEnemyAmountBar.setCharacterSize(resourcesBar.getSize().y);
 }
 
 void GameBar::setGreenResource() {
