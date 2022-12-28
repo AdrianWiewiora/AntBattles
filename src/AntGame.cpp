@@ -21,21 +21,6 @@ AntGame::AntGame() {
     view1.setSize(viewWidth,viewHeight);
     view1.setCenter(1920,2700);
 
-    for(auto & i : redResourcesRS){
-        i.setSize(sf::Vector2f(100.0, 100.0));
-        i.setTexture(&blueResourceTexture);
-        i.setOrigin(50,50);
-        i.setPosition(rand()%3840,rand()%5400);
-    }
-
-    //delete blackResourcesRS;
-
-    //sf::RectangleShape* blackResourcesRS = new sf::RectangleShape;
-//    blackResourcesRS->setTexture(&greenResourceTexture);
-//    blackResourcesRS->setOrigin(50,50);
-//    blackResourcesRS->setPosition(1000,1600);
-//    std::cout<<blackResourcesRS;
-//    blackResourcesRS->setPosition(rand()%3840,rand()%5400);
 
     //Enemys
     for(int h=0;h<5;h++){
@@ -60,7 +45,7 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
     view1.setSize(sizeX,sizeY);
 
     //Function steering View Center itd
-    float move = 500 * frameInfo.delta;
+    float move = 1000 * frameInfo.delta;
     sf::Vector2f vectorCenterMax = MaxCenter();
     sf::Vector2f vectorCenterMin = MinCenter();
 
@@ -84,6 +69,20 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
     }
     //Function GameBar
     gameBar.setGameBar(view1,window);
+
+    //Function spawn Rains
+    if(mRainExist == 0){
+        if(time > 10.000){
+            for(auto & i : redResourcesRS){
+                i.setSize(sf::Vector2f(100.0, 100.0));
+                i.setTexture(&blueResourceTexture);
+                i.setOrigin(50,50);
+                i.setPosition(rand()%3840,rand()%5400);
+            }
+            std::cout<<time << std::endl;
+            mRainExist = 1;
+        }
+    }
 
     //Function green resource
     greenResourcesRS.setPosition(800,360);
@@ -134,7 +133,7 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
         else mUpgradeMenuExist = 1;
     }
     frameInfo.keyPressed = 0;
-    if(mUpgradeMenuExist==1) mUpgradeMenu.showUpgradeMenu(view1);
+    if(mUpgradeMenuExist==1) mUpgradeMenu.showUpgradeMenu(view1, window, gameBar);
 
     //Function Enemies
     for(int j=0;j<5;j++){
@@ -147,26 +146,20 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
             }
             enemies[j].moveEnemy(frameInfo, window, ant1.getPositionAnt(), enemyPosition);
             antPosition = ant1.getPositionAnt();
-            if(enemies[j].getPositionEnemy().x > antPosition.x-150 && enemies[j].getPositionEnemy().x < antPosition.x+150){
-                if(enemies[j].getPositionEnemy().y > antPosition.y-150 && enemies[j].getPositionEnemy().y < antPosition.y+150){
+            if(enemies[j].getPositionEnemy().x > antPosition.x-200 && enemies[j].getPositionEnemy().x < antPosition.x+200){
+                if(enemies[j].getPositionEnemy().y > antPosition.y-200 && enemies[j].getPositionEnemy().y < antPosition.y+200){
                     gameBar.attackHP(time);
-                    enemies[j].setHP(time);
+                    enemies[j].setHP(time, gameBar);
                 }
             }
         }
     }
 
-
-
-//    blackResourcesRS->setTexture(&greenResourceTexture);
-//    blackResourcesRS->setOrigin(50,50);
-//    blackResourcesRS->setPosition(1000,1600);
-//    window->draw(*blackResourcesRS);
-//    std::cout<<blackResourcesRS;
-//
-//    if(blackResourcesRS == nullptr){
-//        //std::cout<<"dupa";
-//    }
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+        if(mUpgradeMenu.getButtonUpgradeAttack().buttonClickedMap(window,mUpgradeMenu.getTlo().getSize().x/4,mUpgradeMenu.getTlo().getSize().y/15 ) == 1){
+            gameBar.buyUpgradePlayerAttack();
+        }
+    }
 
 }
 
@@ -181,13 +174,6 @@ void AntGame::Render(sf::RenderWindow *window) {
     for(int i = 0;i<5;i++)enemies[i].drawEnemy(window);
     gameBar.drawGameBar(window);
     if(mUpgradeMenuExist==1) mUpgradeMenu.drawUpgradeMenu(window);
-
-//    std::cout<<blackResourcesRS<<std::endl;
-//    if(blackResourcesRS != nullptr){
-//        window->draw(*blackResourcesRS);
-//    }
-
-
 
 }
 

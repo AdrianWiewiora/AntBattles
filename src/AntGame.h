@@ -25,7 +25,7 @@ private:
     Enemy *enemy;
     GameBar gameBar;
     double time=0,timeHelpGreenResources=0,timeHelpBlueResources=0;
-    int mUpgradeMenuExist=0;
+    int mUpgradeMenuExist=0,mRainExist = 0;
     UpgradeMenu mUpgradeMenu;
     sf::Vector2f antPosition, enemyPosition[5];
 

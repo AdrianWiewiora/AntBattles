@@ -165,7 +165,8 @@ void GameBar::setHp(sf::Vector2f ant,double timeGame) {
         if(hpAmount<100){
             if(ant.x >= 1700 && ant.x <= 2000 && ant.y >= 4100 && ant.y <= 4500){
                 timeHelpHp += (timeGame+0.5);
-                hpAmount+=1;
+                hpAmount+=5;
+                if(hpAmount > 100) hpAmount = 100;
                 hpAmountTextBar.setString(std::to_string(hpAmount));
                 help = hpAmountTextBar.getString();
                 help1 = help + "\\100";
@@ -180,7 +181,7 @@ void GameBar::attackHP(double timeGame) {
         timeHelpHPAttack = 0;
         if(hpAmount>0){
             timeHelpHPAttack += (timeGame+1);
-            hpAmount-=1;
+            hpAmount-=attackEnemyAmount;
             hpAmountTextBar.setString(std::to_string(hpAmount));
             help = hpAmountTextBar.getString();
             help1 = help + "\\100";
@@ -191,4 +192,18 @@ void GameBar::attackHP(double timeGame) {
 
 int GameBar::getHpAmount() {
     return hpAmount;
+}
+
+int GameBar::getAttackEnemiesAmount() {
+    return attackEnemyAmount;
+}
+
+void GameBar::buyUpgradePlayerAttack() {
+    if(blueResourcesAmount > 10){
+        std::cout<<blueResourcesAmount;
+        blueResourcesAmount -= 10;
+        blueResourcesAmountBar.setString(std::to_string(blueResourcesAmount));
+        attackPlayerAmount += 1;
+        attackPlayerAmountBar.setString(std::to_string(attackPlayerAmount));
+    }
 }

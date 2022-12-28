@@ -8,15 +8,16 @@
 
 #include "SFML/Graphics.hpp"
 #include "FrameInfo.h"
+#include "GameBar.h"
 #include <cmath>
+#include <iostream>
 
 class Enemy {
 private:
-    sf::Sprite enemy;
     sf::Texture textureAnt;
     sf::Sprite *redAnt;
     int hpEnemy = 10;
-    int hpTimeHelp;
+    int hpTimeHelp,helpEnemyPos=0;
 public:
     Enemy();
     ~Enemy();
@@ -25,7 +26,7 @@ public:
     void
     moveEnemy(FrameInfo &frameInfo, sf::RenderWindow *window, sf::Vector2f targetPosition, sf::Vector2f otherPosition[5]);
     void setEnemy(float x, float y);
-    void setHP(double timeGame);
+    void setHP(double timeGame, GameBar gameBarF);
     sf::Sprite* getPtr();
     int getHp();
 };
