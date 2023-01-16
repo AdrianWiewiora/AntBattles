@@ -79,7 +79,6 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
                 i.setOrigin(50,50);
                 i.setPosition(rand()%3840,rand()%5400);
             }
-            std::cout<<time << std::endl;
             mRainExist = 1;
         }
     }
@@ -133,7 +132,7 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
         else mUpgradeMenuExist = 1;
     }
     frameInfo.keyPressed = 0;
-    if(mUpgradeMenuExist==1) mUpgradeMenu.showUpgradeMenu(view1, window, gameBar);
+    if(mUpgradeMenuExist==1) mUpgradeMenu.showUpgradeMenu(view1, window, gameBar, time);
 
     //Function Enemies
     for(int j=0;j<5;j++){
@@ -156,8 +155,11 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
     }
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-        if(mUpgradeMenu.getButtonUpgradeAttack().buttonClickedMap(window,mUpgradeMenu.getTlo().getSize().x/4,mUpgradeMenu.getTlo().getSize().y/15 ) == 1){
-            gameBar.buyUpgradePlayerAttack();
+        if(mUpgradeMenu.getButtonUpgradeAttack().buttonClickedMap(window,mUpgradeMenu.getTlo().getSize().x/3,mUpgradeMenu.getTlo().getSize().y/15 ) == 1){
+            gameBar.buyUpgradePlayerAttack(time);
+        }
+        if(mUpgradeMenu.getButtonUpgradeHealing().buttonClickedMap(window,mUpgradeMenu.getTlo().getSize().x/3,mUpgradeMenu.getTlo().getSize().y/15 ) == 1){
+            gameBar.buyUpgradePlayerHealing(time);
         }
     }
 

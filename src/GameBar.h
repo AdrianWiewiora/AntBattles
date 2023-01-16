@@ -15,9 +15,9 @@ private:
     sf::Font mFont;
     sf::Texture textureHpIcon, textureAttackPlayer, textureAttackEnemy;
     std::string help,help1;
-    int blueResourcesAmount,greenResourcesAmount,hpAmount,attackPlayerAmount,attackEnemyAmount;
+    int blueResourcesAmount,greenResourcesAmount,hpAmount,attackPlayerAmount,attackEnemyAmount, hpAddAmount = 3;
     Button m_Button1{1450.0,387.5,"Exit"};
-    double timeHelpHp = 0,timeHelpHPAttack = 0;
+    double timeHelpHp = 0,timeHelpHPAttack = 0, timeHelpBuyUpgradeAttack = 0, timeHelpBuyUpgradeHealing = 0;
 public:
     GameBar();
     static sf::Vector2f round(sf::Vector2f vector);
@@ -30,7 +30,8 @@ public:
     void attackHP(double timeGame);
     int getHpAmount();
     int getAttackEnemiesAmount();
-    void buyUpgradePlayerAttack();
+    void buyUpgradePlayerAttack(double timeGame);
+    void buyUpgradePlayerHealing(double timeGame);
 };
 
 

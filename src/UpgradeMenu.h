@@ -13,12 +13,14 @@
 class UpgradeMenu{
 private:
     sf::RectangleShape mTloUpgradeMenu;
-    Button mButton1{1500,200,"Upgrade Attack"};
+    Button mButton1{1500,200,"Upgrade Attack -10"};
+    Button mButton2{1500,300,"Upgrade Healing -10"};
 public:
     UpgradeMenu();
-    void showUpgradeMenu(sf::View view,sf::RenderWindow *window, GameBar gameBarUp);
+    void showUpgradeMenu(sf::View view,sf::RenderWindow *window, GameBar gameBarUp, double timeGame);
     void drawUpgradeMenu(sf::RenderWindow *window);
     Button getButtonUpgradeAttack();
+    Button getButtonUpgradeHealing();
     sf::RectangleShape getTlo();
 };
 

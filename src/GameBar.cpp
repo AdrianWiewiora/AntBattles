@@ -155,7 +155,7 @@ void GameBar::setGreenResource() {
 }
 
 void GameBar::setBlueResource() {
-    blueResourcesAmount += 1;
+    blueResourcesAmount += 10;
     blueResourcesAmountBar.setString(std::to_string(blueResourcesAmount));
 }
 
@@ -165,7 +165,7 @@ void GameBar::setHp(sf::Vector2f ant,double timeGame) {
         if(hpAmount<100){
             if(ant.x >= 1700 && ant.x <= 2000 && ant.y >= 4100 && ant.y <= 4500){
                 timeHelpHp += (timeGame+0.5);
-                hpAmount+=5;
+                hpAmount+=hpAddAmount;
                 if(hpAmount > 100) hpAmount = 100;
                 hpAmountTextBar.setString(std::to_string(hpAmount));
                 help = hpAmountTextBar.getString();
@@ -198,12 +198,28 @@ int GameBar::getAttackEnemiesAmount() {
     return attackEnemyAmount;
 }
 
-void GameBar::buyUpgradePlayerAttack() {
-    if(blueResourcesAmount > 10){
-        std::cout<<blueResourcesAmount;
-        blueResourcesAmount -= 10;
-        blueResourcesAmountBar.setString(std::to_string(blueResourcesAmount));
-        attackPlayerAmount += 1;
-        attackPlayerAmountBar.setString(std::to_string(attackPlayerAmount));
+void GameBar::buyUpgradePlayerAttack(double timeGame) {
+    if(timeGame > timeHelpBuyUpgradeAttack){
+        timeHelpBuyUpgradeAttack = 0;
+        if(blueResourcesAmount >= 10){
+            timeHelpBuyUpgradeAttack += (timeGame+0.1);
+            blueResourcesAmount -= 10;
+            blueResourcesAmountBar.setString(std::to_string(blueResourcesAmount));
+            attackPlayerAmount += 1;
+            attackPlayerAmountBar.setString(std::to_string(attackPlayerAmount));
+        }
+    }
+
+}
+
+void GameBar::buyUpgradePlayerHealing(double timeGame) {
+    if(timeGame > timeHelpBuyUpgradeHealing){
+        timeHelpBuyUpgradeHealing = 0;
+        if(greenResourcesAmount>= 10){
+            timeHelpBuyUpgradeHealing += (timeGame+0.1);
+            greenResourcesAmount -= 10;
+            greenResourcesAmountBar.setString(std::to_string(greenResourcesAmount));
+            hpAddAmount += 2;
+        }
     }
 }
