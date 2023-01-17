@@ -38,7 +38,7 @@ AntGame::AntGame() {
         gameBar.setAttackPlayerAmount(4);
     }
     if(GameState::mDifficultyLevel == 3){
-        gameBar.setAttackEnemyAmount(10);
+        gameBar.setAttackEnemyAmount(3);
         gameBar.setAttackPlayerAmount(3);
     }
 
