@@ -7,7 +7,7 @@
 Enemy::Enemy() {
     textureAnt.loadFromFile("../images/ant3.png");
 
-    delete redAnt;
+    //delete redAnt;
     redAnt = new sf::Sprite;
     redAnt->setTexture(textureAnt);
     redAnt->setOrigin(sf::Vector2f(redAnt->getTexture()->getSize().x * 0.5,redAnt->getTexture()->getSize().y * 0.5));
@@ -70,11 +70,10 @@ void Enemy::setHP(double timeGame, GameBar gameBarF) {
         hpTimeHelp = 0;
         if(hpEnemy > 0){
             hpTimeHelp += (timeGame + 1);
-            hpEnemy -= gameBarF.getAttackEnemiesAmount();
+            hpEnemy -= gameBarF.getAttackPlayerAmount();
         }
-
     }
-    if(hpEnemy == 0){
+    if(hpEnemy <= 0){
         redAnt->setPosition(-500,-500);
     }
 }
@@ -85,4 +84,13 @@ sf::Sprite* Enemy::getPtr() {
 
 int Enemy::getHp() {
     return hpEnemy;
+}
+
+void Enemy::resetEnemies() {
+    hpEnemy = newHpAdded;
+    redAnt->setPosition(-500,-500);
+}
+
+void Enemy::setNewHp(int newHp) {
+    newHpAdded = newHp;
 }

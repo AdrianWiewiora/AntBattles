@@ -66,7 +66,15 @@ GameBar::GameBar() {
     attackEnemyAmountBar.setFont(mFont);
     attackEnemyAmountBar.setFillColor(sf::Color::Black);
 
-
+    waveNumberAmount = 1;
+    waveNumberAmountBar.setString(std::to_string(waveNumberAmount));
+    waveNumberAmountBar.setCharacterSize(20);
+    waveNumberAmountBar.setFont(mFont);
+    waveNumberAmountBar.setFillColor(sf::Color::Black);
+    waveBar.setString("Wave= ");
+    waveBar.setCharacterSize(20);
+    waveBar.setFont(mFont);
+    waveBar.setFillColor(sf::Color::Black);
 }
 
 void GameBar::drawGameBar(sf::RenderWindow *window) {
@@ -81,6 +89,8 @@ void GameBar::drawGameBar(sf::RenderWindow *window) {
     window->draw(attackEnemy);
     window->draw(attackEnemyAmountBar);
     window->draw(attackPlayerAmountBar);
+    window->draw(waveNumberAmountBar);
+    window->draw(waveBar);
     m_Button1.Render(window);
 }
 
@@ -141,12 +151,22 @@ void GameBar::setGameBar(sf::View view,sf::RenderWindow *window) {
     attackPlayerAmountBar.setCharacterSize(resourcesBar.getSize().y);
 
     //Function attack Enemy
+    attackEnemyAmountBar.setString(std::to_string(attackEnemyAmount));
     attackEnemy.setSize(sf::Vector2f(sizeResourcesBar.y / 1.1,sizeResourcesBar.y / 1.1));
     attackEnemy.setOrigin(attackEnemy.getSize().x,attackEnemy.getSize().y);
     attackEnemy.setPosition(resourcesBar.getPosition().x + 15 * (resourcesBar.getSize().x / 30),resourcesBar.getPosition().y + (resourcesBar.getSize().y)/1.008);
     attackEnemyAmountBar.setOrigin(rounded);
     attackEnemyAmountBar.setPosition(resourcesBar.getPosition().x + 15.5 * (resourcesBar.getSize().x / 30),resourcesBar.getPosition().y + (resourcesBar.getSize().y / 2));
     attackEnemyAmountBar.setCharacterSize(resourcesBar.getSize().y);
+
+    //Function wave number
+    waveNumberAmountBar.setString(std::to_string(waveNumberAmount));
+    waveNumberAmountBar.setOrigin(rounded);
+    waveNumberAmountBar.setPosition(resourcesBar.getPosition().x + 22.1 * (resourcesBar.getSize().x / 30),resourcesBar.getPosition().y + (resourcesBar.getSize().y / 2));
+    waveNumberAmountBar.setCharacterSize(resourcesBar.getSize().y);
+    waveBar.setOrigin(rounded);
+    waveBar.setPosition(resourcesBar.getPosition().x + 20.1 * (resourcesBar.getSize().x / 30),resourcesBar.getPosition().y + (resourcesBar.getSize().y / 2));
+    waveBar.setCharacterSize(resourcesBar.getSize().y);
 }
 
 void GameBar::setGreenResource() {
@@ -155,7 +175,7 @@ void GameBar::setGreenResource() {
 }
 
 void GameBar::setBlueResource() {
-    blueResourcesAmount += 10;
+    blueResourcesAmount += 1;
     blueResourcesAmountBar.setString(std::to_string(blueResourcesAmount));
 }
 
@@ -164,7 +184,7 @@ void GameBar::setHp(sf::Vector2f ant,double timeGame) {
         timeHelpHp = 0;
         if(hpAmount<100){
             if(ant.x >= 1700 && ant.x <= 2000 && ant.y >= 4100 && ant.y <= 4500){
-                timeHelpHp += (timeGame+0.5);
+                timeHelpHp += (timeGame+2);
                 hpAmount+=hpAddAmount;
                 if(hpAmount > 100) hpAmount = 100;
                 hpAmountTextBar.setString(std::to_string(hpAmount));
@@ -223,3 +243,27 @@ void GameBar::buyUpgradePlayerHealing(double timeGame) {
         }
     }
 }
+
+void GameBar::setWave() {
+    waveNumberAmount += 1;
+    attackEnemyAmount += 1;
+}
+
+int GameBar::getWave() {
+    return waveNumberAmount;
+}
+
+void GameBar::setAttackPlayerAmount(int newValue) {
+    attackPlayerAmount = newValue;
+    attackPlayerAmountBar.setString(std::to_string(attackPlayerAmount));
+}
+
+void GameBar::setAttackEnemyAmount(int newValue) {
+    attackEnemyAmount = newValue;
+    attackEnemyAmountBar.setString(std::to_string(attackEnemyAmount));
+}
+
+int GameBar::getAttackPlayerAmount() {
+    return attackPlayerAmount;
+}
+

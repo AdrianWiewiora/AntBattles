@@ -7,8 +7,6 @@ Menu::Menu() {
 }
 
 void Menu::Update(sf::RenderWindow *window, FrameInfo &frameInfo) {
-    m_lifetime -= frameInfo.delta;
-
     if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
         if(m_Button1.buttonClicked(window) == 1){
             m_queued_game_state = (GameState *)new AntGame();
@@ -20,9 +18,6 @@ void Menu::Update(sf::RenderWindow *window, FrameInfo &frameInfo) {
             window->close();
         }
     }
-
-//    if (m_lifetime <= 0.0)
-//        m_queued_game_state = (GameState *)new AntGame();
 }
 void Menu::Render(sf::RenderWindow *window) {
     window->draw(Tlo);

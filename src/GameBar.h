@@ -11,11 +11,11 @@ private:
     sf::Vector2f sizeResourcesBar,sizeHpIcon, sizeAttackIcon;
     sf::CircleShape blueResources;
     sf::CircleShape greenResources;
-    sf::Text blueResourcesAmountBar,greenResourcesAmountBar,hpAmountTextBar,attackPlayerAmountBar,attackEnemyAmountBar;
+    sf::Text blueResourcesAmountBar,greenResourcesAmountBar,hpAmountTextBar,attackPlayerAmountBar,attackEnemyAmountBar, waveNumberAmountBar, waveBar;
     sf::Font mFont;
     sf::Texture textureHpIcon, textureAttackPlayer, textureAttackEnemy;
     std::string help,help1;
-    int blueResourcesAmount,greenResourcesAmount,hpAmount,attackPlayerAmount,attackEnemyAmount, hpAddAmount = 3;
+    int blueResourcesAmount,greenResourcesAmount,hpAmount,attackPlayerAmount,attackEnemyAmount, hpAddAmount = 3, waveNumberAmount;
     Button m_Button1{1450.0,387.5,"Exit"};
     double timeHelpHp = 0,timeHelpHPAttack = 0, timeHelpBuyUpgradeAttack = 0, timeHelpBuyUpgradeHealing = 0;
 public:
@@ -30,8 +30,13 @@ public:
     void attackHP(double timeGame);
     int getHpAmount();
     int getAttackEnemiesAmount();
+    int getAttackPlayerAmount();
     void buyUpgradePlayerAttack(double timeGame);
     void buyUpgradePlayerHealing(double timeGame);
+    void setWave();
+    int getWave();
+    void setAttackPlayerAmount(int newValue);
+    void setAttackEnemyAmount(int newValue);
 };
 
 

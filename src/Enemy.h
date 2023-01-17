@@ -16,8 +16,8 @@ class Enemy {
 private:
     sf::Texture textureAnt;
     sf::Sprite *redAnt;
-    int hpEnemy = 10;
-    int hpTimeHelp,helpEnemyPos=0;
+    int hpEnemy = 10, newHpAdded = 10;
+    int hpTimeHelp = 0;
 public:
     Enemy();
     ~Enemy();
@@ -29,6 +29,8 @@ public:
     void setHP(double timeGame, GameBar gameBarF);
     sf::Sprite* getPtr();
     int getHp();
+    void resetEnemies();
+    void setNewHp(int newHp);
 };
 
 

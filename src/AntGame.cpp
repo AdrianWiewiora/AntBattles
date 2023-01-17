@@ -11,6 +11,7 @@ AntGame::AntGame() {
     greenResourceTextureBW.loadFromFile("../images/greenResourcesBW.png");
     blueResourceTexture.loadFromFile("../images/blueResources.png");
     blueResourceTextureBW.loadFromFile("../images/blueResourcesBW.png");
+    blueResourcesTextureTransparent.loadFromFile("../images/transparent.png");
     greenResourcesRS.setSize(sf::Vector2f(100.0, 100.0));
     blueResourcesRS.setSize(sf::Vector2f(100.0, 100.0));
     greenResourcesRS.setTexture(&greenResourceTexture);
@@ -22,12 +23,24 @@ AntGame::AntGame() {
     view1.setCenter(1920,2700);
 
 
-    //Enemys
+    //Enemies
     for(int h=0;h<5;h++){
         enemies[h].setEnemy(rand()%3840,rand()%5400);
     }
 
-
+    //Function Difficulty Level
+    if(GameState::mDifficultyLevel == 1){
+        gameBar.setAttackEnemyAmount(1);
+        gameBar.setAttackPlayerAmount(5);
+    }
+    if(GameState::mDifficultyLevel == 2){
+        gameBar.setAttackEnemyAmount(2);
+        gameBar.setAttackPlayerAmount(4);
+    }
+    if(GameState::mDifficultyLevel == 3){
+        gameBar.setAttackEnemyAmount(10);
+        gameBar.setAttackPlayerAmount(3);
+    }
 
 }
 
@@ -70,19 +83,6 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
     //Function GameBar
     gameBar.setGameBar(view1,window);
 
-    //Function spawn Rains
-    if(mRainExist == 0){
-        if(time > 10.000){
-            for(auto & i : redResourcesRS){
-                i.setSize(sf::Vector2f(100.0, 100.0));
-                i.setTexture(&blueResourceTexture);
-                i.setOrigin(50,50);
-                i.setPosition(rand()%3840,rand()%5400);
-            }
-            mRainExist = 1;
-        }
-    }
-
     //Function green resource
     greenResourcesRS.setPosition(800,360);
     if(time > timeHelpGreenResources){
@@ -103,7 +103,7 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
         blueResourcesRS.setTexture(&blueResourceTexture);
         if(ant1.getPositionAnt().x <= blueResourcesRS.getPosition().x+50 && ant1.getPositionAnt().x >= blueResourcesRS.getPosition().x-50){
             if(ant1.getPositionAnt().y <= blueResourcesRS.getPosition().y+50 && ant1.getPositionAnt().y >= blueResourcesRS.getPosition().y-50){
-                timeHelpBlueResources += (time+1);
+                timeHelpBlueResources += (time+3);
                 gameBar.setBlueResource();
                 blueResourcesRS.setTexture(&blueResourceTextureBW);
             }
@@ -111,16 +111,16 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
     }
     //Function HP
     gameBar.setHp(ant1.getPositionAnt(),time);
-    if(gameBar.getHpAmount() == 0){
+    if(gameBar.getHpAmount() <= 0){
         m_queued_game_state = (GameState *)new Menu();
     }
 
-    //Function Red resources
+    //Function Red resources (rain)
     for(auto & i : redResourcesRS){
         if(ant1.getPositionAnt().x <= i.getPosition().x+50 && ant1.getPositionAnt().x >= i.getPosition().x-50){
             if(ant1.getPositionAnt().y <= i.getPosition().y+50 && ant1.getPositionAnt().y >= i.getPosition().y-50){
                 gameBar.setBlueResource();
-                i.setFillColor(sf::Color::Transparent);
+                i.setTexture(&blueResourcesTextureTransparent);
                 i.setPosition(-100,-100);
             }
         }
@@ -136,7 +136,7 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
 
     //Function Enemies
     for(int j=0;j<5;j++){
-        if(enemies[j].getHp() != 0){
+        if(enemies[j].getHp() > 0){
             for(int g=0;g<5;g++){
                 enemyPosition[g]=enemies[g].getPositionEnemy();
                 if(g==j){
@@ -145,15 +145,24 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
             }
             enemies[j].moveEnemy(frameInfo, window, ant1.getPositionAnt(), enemyPosition);
             antPosition = ant1.getPositionAnt();
-            if(enemies[j].getPositionEnemy().x > antPosition.x-200 && enemies[j].getPositionEnemy().x < antPosition.x+200){
-                if(enemies[j].getPositionEnemy().y > antPosition.y-200 && enemies[j].getPositionEnemy().y < antPosition.y+200){
+            if(enemies[j].getPositionEnemy().x > antPosition.x-160 && enemies[j].getPositionEnemy().x < antPosition.x+160){
+                if(enemies[j].getPositionEnemy().y > antPosition.y-160 && enemies[j].getPositionEnemy().y < antPosition.y+160){
                     gameBar.attackHP(time);
-                    enemies[j].setHP(time, gameBar);
+                }
+            }
+            if(time > timeHelpAttackPlayer){
+                timeHelpAttackPlayer = 0;
+                if(enemies[j].getPositionEnemy().x > antPosition.x-200 && enemies[j].getPositionEnemy().x < antPosition.x+200){
+                    if(enemies[j].getPositionEnemy().y > antPosition.y-200 && enemies[j].getPositionEnemy().y < antPosition.y+200){
+                        enemies[j].setHP(time, gameBar);
+                        timeHelpAttackPlayer += (time+1);
+                    }
                 }
             }
         }
     }
 
+    //Function Upgrades
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){
         if(mUpgradeMenu.getButtonUpgradeAttack().buttonClickedMap(window,mUpgradeMenu.getTlo().getSize().x/3,mUpgradeMenu.getTlo().getSize().y/15 ) == 1){
             gameBar.buyUpgradePlayerAttack(time);
@@ -163,6 +172,26 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
         }
     }
 
+    //Function wave
+    if(time > nextWaveTime){
+        gameBar.setWave();
+        nextWaveTime += 40.0;
+        for(int h=0;h<5;h++){
+            enemies[h].resetEnemies();
+            enemies[h].setEnemy(rand()%3840,rand()%5400);
+        }
+        if(gameBar.getWave()%2 == 0) rain();
+    }
+    if(gameBar.getWave() == 3){
+        for(int j=0;j<5;j++){
+            enemies[j].setNewHp(20);
+        }
+    }
+    if(gameBar.getWave() == 6){
+        for(int j=0;j<5;j++){
+            enemies[j].setNewHp(30);
+        }
+    }
 }
 
 
@@ -207,5 +236,13 @@ float AntGame::Clamp(float value, float max, float min) {
 
 AntGame::~AntGame() {
     delete blackResourcesRS;
-    delete enemy;
+}
+
+void AntGame::rain() {
+    for(auto & i : redResourcesRS){
+        i.setSize(sf::Vector2f(100.0, 100.0));
+        i.setTexture(&blueResourceTexture);
+        i.setOrigin(50,50);
+        i.setPosition(rand()%3840,rand()%5400);
+    }
 }
