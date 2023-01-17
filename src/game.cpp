@@ -3,8 +3,8 @@
 #include "SFML/Graphics/Color.hpp"
 
 void Game::initWindow() {
-    //this->window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "Little Big Strategy",sf::Style::Fullscreen);
-    this->window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "Little Big Strategy");
+    this->window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "Little Big Strategy",sf::Style::Fullscreen);
+    //this->window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "Little Big Strategy");
 }
 
 Game::Game() {
@@ -84,6 +84,7 @@ void Game::run() {
       GameState* t = m_current_state->getQueuedGameState();
       delete m_current_state;
       m_current_state = t;
+      window->setView(window->getDefaultView());
     }
     window->setFramerateLimit(300);
 

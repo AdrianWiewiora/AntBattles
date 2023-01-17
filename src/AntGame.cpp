@@ -163,12 +163,14 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
     }
 
     //Function Upgrades
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-        if(mUpgradeMenu.getButtonUpgradeAttack().buttonClickedMap(window,mUpgradeMenu.getTlo().getSize().x/3,mUpgradeMenu.getTlo().getSize().y/15 ) == 1){
-            gameBar.buyUpgradePlayerAttack(time);
-        }
-        if(mUpgradeMenu.getButtonUpgradeHealing().buttonClickedMap(window,mUpgradeMenu.getTlo().getSize().x/3,mUpgradeMenu.getTlo().getSize().y/15 ) == 1){
-            gameBar.buyUpgradePlayerHealing(time);
+    if(mUpgradeMenuExist==1){
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+            if(mUpgradeMenu.getButtonUpgradeAttack().buttonClickedMap(window,mUpgradeMenu.getTlo().getSize().x/3,mUpgradeMenu.getTlo().getSize().y/15 ) == 1){
+                gameBar.buyUpgradePlayerAttack(time);
+            }
+            if(mUpgradeMenu.getButtonUpgradeHealing().buttonClickedMap(window,mUpgradeMenu.getTlo().getSize().x/3,mUpgradeMenu.getTlo().getSize().y/15 ) == 1){
+                gameBar.buyUpgradePlayerHealing(time);
+            }
         }
     }
 
@@ -191,6 +193,9 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
         for(int j=0;j<5;j++){
             enemies[j].setNewHp(30);
         }
+    }
+    if(gameBar.getWave() == 11){
+        m_queued_game_state = (GameState *)new Menu();
     }
 }
 

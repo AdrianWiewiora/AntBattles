@@ -11,5 +11,6 @@ public:
     static int mDifficultyLevel;
     virtual void Render(sf::RenderWindow *window) = 0;
     virtual void Update(sf::RenderWindow *window, FrameInfo &frameInfo) = 0;
+    virtual ~GameState();
     GameState *getQueuedGameState();
 };
