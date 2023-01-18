@@ -2,7 +2,6 @@
 // Created by AdiAs on 15.11.2022.
 //
 
-#include <iostream>
 #include "Ant.h"
 
 Ant::Ant() {
@@ -36,7 +35,7 @@ void Ant::drawAnt(sf::RenderWindow *window) {
     window->draw(ant);
 }
 
-void Ant::moveAnt(FrameInfo &frameInfo,sf::RenderWindow *window) {
+void Ant::moveAnt(FrameInfo &frameInfo) {
 
     sf::Vector2f currentPosition = ant.getPosition();
     sf::Vector2f normalized = (targetPosition - currentPosition);

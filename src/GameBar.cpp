@@ -214,10 +214,6 @@ int GameBar::getHpAmount() {
     return hpAmount;
 }
 
-int GameBar::getAttackEnemiesAmount() {
-    return attackEnemyAmount;
-}
-
 void GameBar::buyUpgradePlayerAttack(double timeGame) {
     if(timeGame > timeHelpBuyUpgradeAttack){
         timeHelpBuyUpgradeAttack = 0;

@@ -23,7 +23,7 @@ void Enemy::drawEnemy(sf::RenderWindow *window) {
     window->draw(*redAnt);
 }
 
-void Enemy::moveEnemy(FrameInfo &frameInfo, sf::RenderWindow *window, sf::Vector2f targetPosition, sf::Vector2f otherPosition[5]){
+void Enemy::moveEnemy(FrameInfo &frameInfo, sf::Vector2f targetPosition, sf::Vector2f otherPosition[5]) {
     sf::Vector2f currentPosition = redAnt->getPosition();
     srand( time( NULL ) );
     //Rotation
@@ -76,10 +76,6 @@ void Enemy::setHP(double timeGame, GameBar gameBarF) {
     if(hpEnemy <= 0){
         redAnt->setPosition(-500,-500);
     }
-}
-
-sf::Sprite* Enemy::getPtr() {
-    return redAnt;
 }
 
 int Enemy::getHp() {

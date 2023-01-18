@@ -3,9 +3,9 @@
 
 
 AntGame::AntGame() {
-    Torf.loadFromFile("../images/mapTexture2.png");
+    map.loadFromFile("../images/mapTexture2.png");
     tlo.setSize(sf::Vector2f(3840.0, 5400.0));
-    tlo.setTexture(&Torf);
+    tlo.setTexture(&map);
 
     greenResourceTexture.loadFromFile("../images/greenResources.png");
     greenResourceTextureBW.loadFromFile("../images/greenResourcesBW.png");
@@ -78,7 +78,7 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
             ant1.setRotationAnt(window);
             ant1.targetPosition = window->mapPixelToCoords(mousePosition);
         }
-        ant1.moveAnt(frameInfo,window);
+        ant1.moveAnt(frameInfo);
     }
     //Function GameBar
     gameBar.setGameBar(view1,window);
@@ -132,7 +132,7 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
         else mUpgradeMenuExist = 1;
     }
     frameInfo.keyPressed = 0;
-    if(mUpgradeMenuExist==1) mUpgradeMenu.showUpgradeMenu(view1, window, gameBar, time);
+    if(mUpgradeMenuExist==1) mUpgradeMenu.showUpgradeMenu(view1);
 
     //Function Enemies
     for(int j=0;j<5;j++){
@@ -143,7 +143,7 @@ void AntGame::Update(sf::RenderWindow *window, FrameInfo &frameInfo)  {
                     enemyPosition[g]=antPosition;
                 }
             }
-            enemies[j].moveEnemy(frameInfo, window, ant1.getPositionAnt(), enemyPosition);
+            enemies[j].moveEnemy(frameInfo, ant1.getPositionAnt(), enemyPosition);
             antPosition = ant1.getPositionAnt();
             if(enemies[j].getPositionEnemy().x > antPosition.x-160 && enemies[j].getPositionEnemy().x < antPosition.x+160){
                 if(enemies[j].getPositionEnemy().y > antPosition.y-160 && enemies[j].getPositionEnemy().y < antPosition.y+160){

@@ -11,7 +11,7 @@ UpgradeMenu::UpgradeMenu() {
     mTloUpgradeMenu.setOrigin(50,50);
 }
 
-void UpgradeMenu::showUpgradeMenu(sf::View view,sf::RenderWindow *window, GameBar gameBarUp, double timeGame) {
+void UpgradeMenu::showUpgradeMenu(sf::View view) {
     mTloUpgradeMenu.setPosition(view.getCenter());
     mTloUpgradeMenu.setSize(sf::Vector2f(view.getSize().x/1.4f,view.getSize().y/1.4f));
     mTloUpgradeMenu.setOrigin(mTloUpgradeMenu.getSize().x/2,mTloUpgradeMenu.getSize().y/2);

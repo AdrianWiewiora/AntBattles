@@ -17,7 +17,7 @@ private:
     Button mButton2{1500,300,"Upgrade Healing -10"};
 public:
     UpgradeMenu();
-    void showUpgradeMenu(sf::View view,sf::RenderWindow *window, GameBar gameBarUp, double timeGame);
+    void showUpgradeMenu(sf::View view);
     void drawUpgradeMenu(sf::RenderWindow *window);
     Button getButtonUpgradeAttack();
     Button getButtonUpgradeHealing();

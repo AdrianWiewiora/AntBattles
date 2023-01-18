@@ -17,7 +17,7 @@
 class AntGame : GameState {
 private:
     sf::RectangleShape tlo,greenResourcesRS,blueResourcesRS,redResourcesRS[38],*blackResourcesRS;
-    sf::Texture Torf,greenResourceTexture,greenResourceTextureBW,blueResourceTexture,blueResourceTextureBW, blueResourcesTextureTransparent;
+    sf::Texture map,greenResourceTexture,greenResourceTextureBW,blueResourceTexture,blueResourceTextureBW, blueResourcesTextureTransparent;
     sf::View view1;
     float viewWidth = 1920,viewHeight = 1080;
     Ant ant1;

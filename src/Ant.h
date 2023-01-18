@@ -13,7 +13,7 @@ public:
     sf::Vector2f getPositionAnt();
     void setRotationAnt(sf::RenderWindow *window);
     void drawAnt(sf::RenderWindow *window);
-    void moveAnt(FrameInfo &frameInfo, sf::RenderWindow *window);
+    void moveAnt(FrameInfo &frameInfo);
     sf::Vector2f targetPosition;
 };
 

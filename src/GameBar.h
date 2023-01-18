@@ -29,7 +29,6 @@ public:
     void setHp(sf::Vector2f antPosition,double timeGame);
     void attackHP(double timeGame);
     int getHpAmount();
-    int getAttackEnemiesAmount();
     int getAttackPlayerAmount();
     void buyUpgradePlayerAttack(double timeGame);
     void buyUpgradePlayerHealing(double timeGame);
